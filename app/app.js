@@ -2,13 +2,13 @@ const path = require("path");
 const express = require("express");
 
 
-// Set up express app
+// Set up the express app to be used
 const app = express();
 app.use(express.static(__dirname + "/pages")); // Serve static files from the pages directory
 const port = process.env.PORT || 8080;
 
 
-// Set up ejs template engine
+// Set up the ejs template engine
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "pages")); // Set the directory of web files as /pages
 

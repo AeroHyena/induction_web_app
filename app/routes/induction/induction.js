@@ -5,7 +5,8 @@ const router = express.Router();
 
 // Define routes for induction page functionalities
 router.get("/", (req, res) => {
-    res.render("induction");
+    // use template.ejs as base, and insert induction.ejs into the templates page
+    res.render("template", {title: "FSOil Induction", contentPath: "induction"});
 });
 
 
