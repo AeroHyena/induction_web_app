@@ -5,7 +5,7 @@ const router = express.Router();
 
 // Define routes for induction page functionalities
 router.get("/", (req, res) => {
-    res.send("Induction page");
+    res.render("induction");
 });
 
 

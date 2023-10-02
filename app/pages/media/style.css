@@ -1,0 +1,5 @@
+#videoContainer {
+    padding : 50px;
+    height: 50vh;  /* half of the viewport  = 50vh */
+    background-color: lightgray;
+}
