@@ -1,3 +1,6 @@
+<!-- This is a template ejs html file.
+The general page data and structure is defined here,
+with a space where unique page data for each route will be inserted. -->
 <!DOCTYPE html>
 
 
@@ -11,9 +14,35 @@
 
 
 <body>
+    <!-- Header goes here-->
+    <header>FSO Logo</header>
+
+
+    <!-- Navigation bar goes here -->
+    <nav id="nav_bar">
+        <!-- At the left-hand side of the header -->
+        <div class="navElement">Induction</div>
+        <div class="navElement">Search</div>
+        <div class="navElement">Reports</div>
+
+        <!-- filler element to consume center space -->
+        <div class="navFiller"> </div>
+
+        <!-- At the right-hand side of the header -->
+        <div class="navElement">Login</div>
+        <div class="navElement">Logout</div>
+    </nav>
+
+
+    <!-- Main page content goes here-->
     <div id="page" >
+        <!-- Insert page content here -->
         <%- include(contentPath) %>
     </div>
+
+
+    <!-- Footer content goes here -->
+    <footer>@2023 Free State Oil. A division of VKB group.</footer>
 </body>
 
 

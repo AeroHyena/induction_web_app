@@ -17,6 +17,7 @@ table, th, td {
     background-color: lightgray;
 }
 
+
 #page {
     /* define the page div as a container for all page sub-containers */
     display: flex;
@@ -26,20 +27,49 @@ table, th, td {
     height: auto;
 }
 
+
 header {
     /* define the header as a container for all header sub-elements */
+    display: flex;
+    padding: 10px 100px; /* top/bottom margins are 10px and left/right margins are 100px */
     width: 100%;
     height: 20%;
 
     border-bottom: 1px solid lightgray;
 }
 
+
 footer {
-    /* define the header as a container for all header sub-elements */
+    /* define the footer as a container for all footer sub-elements */
+    display: flex;
+    padding: 50px 100px; /* top/bottom margins are 50px and left/right margins are 100px */
     width: 100%;
     height: 20%;
 
+    /* define the style for the footer and it's children */
+    background-color: #343434;
     border-top: 1px solid lightgray;
+    color: #ffffff;
+    font-family: "century Gothic";
+    font-size: 13px;
 }
 
+
+#nav_bar {
+    /* define the navigation bar div as a container for navigation elements */
+    display: flex;
+    flex-direction: row;
+}
+
+
+.navElement {
+    /* elsements of the navigation bar */
+    margin: 10px;
+}
+
+
+.navFiller {
+    /* consume remainder center space of the nav bar */
+    flex-grow: 1;
+}
 
