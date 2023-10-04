@@ -9,13 +9,22 @@ with a space where unique page data for each route will be inserted. -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Stylesheet -->
-    <link rel="stylesheet" href="media/style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 
 
 <body>
     <!-- Header goes here-->
-    <header>FSO Logo</header>
+    <header>
+        <!-- Insert logo here-->
+        <div id="logo"><img src="media/logo.png" id="logo"></div>
+
+        <!-- Consume center space -->
+        <div class="headerFiller"> </div>
+
+        <!-- Page title inserted automatically-->
+        <div id="header_title"><%= title %></div>
+    </header>
 
 
     <!-- Navigation bar goes here -->
