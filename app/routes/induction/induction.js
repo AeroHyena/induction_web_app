@@ -11,6 +11,7 @@ router.get("/", (req, res) => {
 
 
 router.post("/", (req, res) => {
+    // handle form submissions here
     res.send("POST detected on Induction page");
 });
 
