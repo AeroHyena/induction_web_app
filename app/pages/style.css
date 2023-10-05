@@ -10,10 +10,15 @@ table, th, td {
     border: 0;
 }
 
+h1, h2, h3 {
+    /* define margins for title elements */
+    margin: 25px;
+}
+
 
 #videoContainer {
     padding : 50px;
-    height: 50vh;  /* half of the viewport  = 50vh */
+    height: 50vh;  /* half of the viewport  = 50vh (vh = viewport height) */
     background-color: lightgray;
 }
 
@@ -93,4 +98,24 @@ footer {
 
 #logo {
     height: 100px;
+}
+
+
+.formLabel {
+    /* make labels in a form have more margin space above and less margin space below */
+    margin-top: 25px;
+    margin-bottom: 10px;
+    padding-left: 25px;
+}
+
+.formInput {
+    /* make form input elements have less margin space above and more margin space below */
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+
+.contentContainer {
+    /* define laybout and styling for page content containers */
+    margin: 25px;
 }
