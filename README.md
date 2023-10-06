@@ -1,0 +1,1 @@
+- Use ``` npm run jsdoc``` to generate documentation for the app.

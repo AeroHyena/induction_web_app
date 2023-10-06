@@ -7,12 +7,16 @@ const router = express.Router();
 router.get("/", (req, res) => {
     // use template.ejs as base, and insert induction.ejs into the templates page
     res.render("template", {title: "FSOil Induction", contentPath: "induction"});
+    console.log("Induction.ejs rendered")
 });
 
 
 router.post("/", (req, res) => {
     // handle form submissions here
-    res.send("POST detected on Induction page");
+    console.log("Post detected on induction route - reading data");
+    console.log(req.body);
+
+    res.send("form data posted successfully")
 });
 
 
