@@ -1,3 +1,16 @@
+/** @overview This is the entry point for the web app.
+ * In this file an express app is created, and all route modules from 
+ * app/routes are imported and set up.
+ * 
+ * Routes generate html files using the ejs template engine.
+ * There is a Template.ejs file with common page elements, and each
+ * route has an ejs file with page-sepcific content.
+ * On route access, the tem[plate and route ejs files are combined
+ * and served.
+ * 
+ * This script sets app/pages/media as a directory from which static 
+ * files - media content - is served.
+ */
 const path = require("path");
 const express = require("express");
 
