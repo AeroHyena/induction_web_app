@@ -15,6 +15,9 @@
 // Imports
 const path = require("path");
 const express = require("express");
+const sqlite3 = require('sqlite3').verbose();
+
+
 
 
 // Set up the express app to be used
@@ -29,6 +32,29 @@ const port = process.env.PORT || 8080;
 // Set up the ejs template engine
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "pages")); // Set the directory of web files as /pages
+
+
+// Set up the sqlite3 database
+const db = new sqlite3.Database('database.db'); //create the database
+
+// Create a table for induction data
+db.run(`
+  CREATE TABLE IF NOT EXISTS inductions (
+    id_nr INTEGER PRIMARY KEY AUTOINCREMENT,
+    full_name TEXT NOT NULL,
+    employee_nr INTEGER UNIQUE
+  )
+`, (error) => {
+  if (error) {
+    console.error('Error creating table: ', error);
+    return;
+  }
+
+  console.log('Table created successfully!');
+});
+
+
+
 
 
 

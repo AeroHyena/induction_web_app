@@ -3,6 +3,7 @@ const router = express.Router();
 
 
 
+
 // Define routes for induction page functionalities
 router.get("/", (req, res) => {
     // use template.ejs as base, and insert induction.ejs into the templates page
@@ -16,7 +17,7 @@ router.post("/", (req, res) => {
     console.log("Post detected on induction route - reading data");
     console.log(req.body);
 
-    res.send("form data posted successfully")
+    res.send("form data posted successfully" + req.body)
 });
 
 
