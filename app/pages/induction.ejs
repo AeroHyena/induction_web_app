@@ -9,36 +9,37 @@ route is accessed. -->
                 <source src="/media/video.mp4" type="video/mp4">
             </video>
         </div>
+
+
+        <!-- Create a form that captures required data for storing
+        the induction information and tracking its validity -->
+        <div id="form" class="contentContainer">
+            <h3>Please complete the form below:</h3>
+            <form action="/" method="POST">
+                <!-- First and last names-->
+                <label for="full_names" class="formLabel">Full names and surname:</label>
+                <input type="text" id="full_names" name="full_names" class="formInput" placeholder="John Doe" required>
+                <br>
+
+                <!-- ID/Passport number-->
+                <label for="id_passport_nr" class="formLabel">ID or passport number:</label>
+                <input type="text" id="id_passport_nr" name="id_passport_nr" class="formInput" placeholder="ID/Passport" required>
+                <br>
+
+                <!-- Employee or guest check -->
+                <p class="formLabel">Are you currently employed at Free State Oil?</p>
+
+                <!-- yes -->
+                <label for="employee_check_yes" class="formLabel">Yes</label>
+                <input type="radio" id="employee_check_yes" name="employee_check" class="formInput">
+                <br>
+                <!-- no -->
+                <label for="employee_check_no" class="formLabel">No</label>
+                <input type="radio" id="employee_check_no" name="employee_check" class="formInput">
+                <br>
+
+                <!-- submit form -->
+                <button type="submit">submit</button> 
+            </form>
+        </div>
     </main>
-
-    <!-- Create a form that captures required data for storing
-    the induction information and tracking its validity -->
-    <div id="form" class="contentContainer">
-        <h3>Please complete the form below:</h3>
-        <form action="/" method="POST">
-            <!-- First and last names-->
-            <label for="full_names" class="formLabel">Full names and surname:</label>
-            <input type="text" id="full_names" name="full_names" class="formInput" placeholder="John Doe" required>
-            <br>
-
-            <!-- ID/Passport number-->
-            <label for="id_passport_nr" class="formLabel">ID or passport number:</label>
-            <input type="text" id="id_passport_nr" name="id_passport_nr" class="formInput" placeholder="ID/Passport" required>
-            <br>
-
-            <!-- Employee or guest check -->
-            <p class="formLabel">Are you currently employed at Free State Oil?</p>
-
-            <!-- yes -->
-            <label for="employee_check_yes" class="formLabel">Yes</label>
-            <input type="radio" id="employee_check_yes" name="employee_check" class="formInput">
-            <br>
-            <!-- no -->
-            <label for="employee_check_no" class="formLabel">No</label>
-            <input type="radio" id="employee_check_no" name="employee_check" class="formInput">
-            <br>
-
-            <!-- submit form -->
-            <button type="submit">submit</button> 
-        </form>
-    </div>

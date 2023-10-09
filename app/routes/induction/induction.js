@@ -7,7 +7,7 @@ const router = express.Router();
 router.get("/", (req, res) => {
     // use template.ejs as base, and insert induction.ejs into the templates page
     res.render("template", {title: "FSOil Induction", contentPath: "induction"});
-    console.log("Induction.ejs rendered")
+    console.log("Induction.ejs rendered " + new Date() )
 });
 
 
