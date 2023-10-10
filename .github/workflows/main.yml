@@ -17,7 +17,7 @@ jobs:
   # This is the first job called "build"
   build:
     # The type of runner that the job will run on
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -39,7 +39,7 @@ jobs:
 
 # Create a second job for deployment
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     needs: [build]
     name: 'Deploy to Netlify'
     steps:
