@@ -9,8 +9,7 @@
   },
   "scripts": {
     "jsdoc": "jsdoc -c jsdoc.json",
-    "start": "node app/app.js",
-    "test": "jest app/app.test.js"
+    "start": "node app/app.js"
   },
   "devDependencies": {
     "jest": "^29.7.0",
