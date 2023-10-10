@@ -20,10 +20,35 @@ const sqlite3 = require('sqlite3').verbose();
 
 
 
+// Set up the sqlite3 database
+const db = new sqlite3.Database('database.db'); //create the database
+
+// Create a table for induction data
+db.run(`
+  CREATE TABLE IF NOT EXISTS inductions (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id_passport_nr TEXT NOT NULL,
+    full_name TEXT NOT NULL,
+    employee_nr INTEGER UNIQUE,
+    video_watched TEXT NOT NULL
+  )
+`, (error) => {
+  if (error) {
+    console.error('Error creating table: ', error);
+    return;
+  }
+
+  console.log('Table "inductions" created successfully!');
+});
+
+
+
 // Set up the express app to be used
 const app = express();
 app.use(express.static(__dirname + "/pages")); // Serve static files from the pages directory
 app.use(express.urlencoded({extended: true })); //parse URL-encoded data
+app.set('db', db); // Set the database in the app
+
 
 /** @default The server is served on the PORT environment variable, or on 8080 by default. */
 const port = process.env.PORT || 8080;
@@ -34,44 +59,26 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "pages")); // Set the directory of web files as /pages
 
 
-// Set up the sqlite3 database
-const db = new sqlite3.Database('database.db'); //create the database
-
-// Create a table for induction data
-db.run(`
-  CREATE TABLE IF NOT EXISTS inductions (
-    id_nr INTEGER PRIMARY KEY AUTOINCREMENT,
-    full_name TEXT NOT NULL,
-    employee_nr INTEGER UNIQUE
-  )
-`, (error) => {
-  if (error) {
-    console.error('Error creating table: ', error);
-    return;
-  }
-
-  console.log('Table created successfully!');
-});
 
 
 
 
 
 
-// Import route modules
-const inductionRoutes = require("./routes/induction/induction");
-const searchRoutes = require("./routes/search/search.js");
-const reportsRoutes = require("./routes/reports/reports.js");
-const loginRoutes = require("./routes/login/login.js");
-const logoutRoutes = require("./routes/logout/logout.js");
+// Import route modules and pass in the database connec connection to the route modules 
+const inductionRoutes = require("./routes/induction/induction")(app);
+//const searchRoutes = require("./routes/search/search.js")(db);
+//const reportsRoutes = require("./routes/reports/reports.js")(db);
+//const loginRoutes = require("./routes/login/login.js")(db);
+//const logoutRoutes = require("./routes/logout/logout.js")(db);
 
 
 // Use the Route modules
 app.use("/", inductionRoutes);
-app.use("/search", searchRoutes);
-app.use("/reports", reportsRoutes);
-app.use("/login", loginRoutes);
-app.use("/logout", logoutRoutes);
+//app.use("/search", searchRoutes);
+//app.use("/reports", reportsRoutes);
+//app.use("/login", loginRoutes);
+//app.use("/logout", logoutRoutes);
 
 
 // launch server

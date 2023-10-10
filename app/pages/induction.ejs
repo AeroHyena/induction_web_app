@@ -4,6 +4,7 @@ route is accessed. -->
 
     <main>
         <!-- Induction video goes here -->
+        <h3>Please watche the video below <em>in full</em></h3>
         <div id="videoContainer">
             <video id="video" controls>
                 <source src="/media/video.mp4" type="video/mp4">
@@ -13,9 +14,9 @@ route is accessed. -->
 
         <!-- Create a form that captures required data for storing
         the induction information and tracking its validity -->
-        <div id="form" class="contentContainer">
+        <div id="formDiv" class="contentContainer" watched="false">
             <h3>Please complete the form below:</h3>
-            <form action="/" method="POST">
+            <form id="form" action="/" method="POST">
                 <!-- First and last names-->
                 <label for="full_names" class="formLabel">Full names and surname:</label>
                 <input type="text" id="full_names" name="full_names" class="formInput" placeholder="John Doe" required>
@@ -31,15 +32,53 @@ route is accessed. -->
 
                 <!-- yes -->
                 <label for="employee_check_yes" class="formLabel">Yes</label>
-                <input type="radio" id="employee_check_yes" name="employee_check" class="formInput">
+                <input type="radio" id="employee_check_yes" name="employee_check" class="formInput" onchange="showEmployeeNumber()" required>
                 <br>
                 <!-- no -->
                 <label for="employee_check_no" class="formLabel">No</label>
-                <input type="radio" id="employee_check_no" name="employee_check" class="formInput">
+                <input type="radio" id="employee_check_no" name="employee_check" class="formInput" onchange="hideEmployeeNumber()" required>
                 <br>
+
+                <!-- Reveal the employee number input field when yes is selected -->
+                <div id="employeeNumberContainer" style="display: none;">
+                    <label for="employeeNumber" class="formLabel">What is your employee number?</label>
+                    <input type="text" id="employeeNumber" name="employeeNumber" class="formInput" placeholder="Employee Number">
+                </div>
 
                 <!-- submit form -->
                 <button type="submit">submit</button> 
             </form>
+            <!-- handle form submission status here -->
+            <!-- Success -->
+            <% if (formStatus === "success") { %>
+            <script>
+                alert("Induction successful! Your data has been processed successfully");
+            </script>
+            <% } %>
+
+            <!-- Video not watched in full -->
+            <% if (formStatus === "!video") { %>
+            <script>
+                alert("Indictuction Unsuccessful - please watch the video in full");
+            </script>
+            <% } %>
+
+            <!-- Invalid ID/Passport -->
+            <% if (formStatus === "!id_passport") { %>
+            <script>
+                alert("Indictuction Unsuccessful - the provided ID/Passport number is not valid");
+            </script>
+            <% } %>
+
+            <!-- Invalid Employee Number -->
+            <% if (formStatus === "!employee_nr") { %>
+            <script>
+                alert("Indictuction Unsuccessful - the provided employee number is not valid");
+            </script>
+            <% } %>
+
         </div>
     </main>
+
+    <script src="scripts/form.js"></script>
+    <script src="scripts/video_watched_tracker.js"></script>

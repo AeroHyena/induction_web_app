@@ -78,6 +78,8 @@ footer {
     /* define the navigation bar div as a container for navigation elements */
     display: flex;
     flex-direction: row;
+
+    border-bottom: 1px solid lightgray;
 }
 
 
@@ -101,7 +103,7 @@ footer {
 }
 
 
-#logo {
+.logo {
     height: 100px;
 }
 
