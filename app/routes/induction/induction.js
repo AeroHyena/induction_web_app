@@ -37,7 +37,7 @@ module.exports = (db) => {
     router.get("/", (req, res) => {
 
         // use template.ejs as base, and insert induction.ejs into the templates page
-        res.render("template", {title: "FSOil Induction", contentPath: "induction", formStatus: "None"});
+        res.status(200).render("template", {title: "FSOil Induction", contentPath: "induction", formStatus: "None"});
         console.log("Induction.ejs rendered " + new Date() )
     });
 

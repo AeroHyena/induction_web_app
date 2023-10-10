@@ -8,6 +8,12 @@
     "sqlite3": "^5.1.6"
   },
   "scripts": {
-    "jsdoc": "jsdoc -c jsdoc.json"
+    "jsdoc": "jsdoc -c jsdoc.json",
+    "start": "node app/app.js",
+    "test": "jest app/app.test.js"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "supertest": "^6.3.3"
   }
 }
