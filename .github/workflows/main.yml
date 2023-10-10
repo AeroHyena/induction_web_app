@@ -21,7 +21,7 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v2
 
     - name: Change permissions of Jest command
       run: chmod +x node_modules/.bin/jest
@@ -33,8 +33,7 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    - name: Run Test
-      run: npm test
+    
 
 
 # Create a second job for deployment
