@@ -74,7 +74,7 @@ module.exports = (db) => {
         
 
        // Create an array with data to be inserted into the database
-        const data = [req.body.full_names, req.body.id_passport_nr, req.body.employee_nr, req.body.videoWatched];
+        const data = [req.body.id_passport_nr, req.body.full_names, req.body.employee_nr, req.body.videoWatched];
 
         // Get the database connection from app.js
         const db = req.app.get("db")
