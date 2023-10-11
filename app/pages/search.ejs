@@ -20,13 +20,13 @@ and if the induction has expried yet. -->
         <% if (data.length === 0 && dataGiven === true) { %>
             <p>No data for your search query has been found.</p>
         <% } else { %>
+            <div class="dataObject" id="resultTitles">
+                <div>Full Names</div>
+                <div>ID/Passport</div>
+                <div>Video Watched</div>
+                <div>Employee/Guest</div>
+            </div>
             <% data.forEach(item => { %>
-                <div class="dataObject" id="resultTitles">
-                    <div>Full Names</div>
-                    <div>ID/Passport</div>
-                    <div>Video Watched</div>
-                    <div>Employee/Guest</div>
-                </div>
                 <div class="dataObject">
                     <div><%= item.full_name %></div>
                     <div><%= item.id_passport_nr %></div>

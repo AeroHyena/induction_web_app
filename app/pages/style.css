@@ -159,13 +159,13 @@ a {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-
-    padding: 10px;;
-    height: 20vh;
+    /* padding: 10px; */
+    /* height: 5vh; */
 }
 
 .dataObject div{
     flex: 1;
+    height: 5vh;
 }
 
 #resultTitles {
