@@ -45,7 +45,7 @@ db.run(`
 
 // Set up the express app to be used
 const app = express();
-app.use(express.static(__dirname + "/pages")); // Serve static files from the pages directory
+app.use(express.static(path.join(__dirname, "/pages"))); // Serve static files from the pages directory
 app.use(express.urlencoded({extended: true })); //parse URL-encoded data
 app.set('db', db); // Set the database in the app
 
