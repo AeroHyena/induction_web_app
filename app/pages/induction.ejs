@@ -49,33 +49,12 @@ route is accessed. -->
                 <button type="submit">submit</button> 
             </form>
             <!-- handle form submission status here -->
-            <!-- Success -->
-            <% if (formStatus === "success") { %>
-            <script>
-                alert("Induction successful! Your data has been processed successfully");
-            </script>
+            <% if (check) { %>
+                <script>
+                    alert("<%= check.status %>" + " " + "<%= check.message %>");
+                </script>
             <% } %>
-
-            <!-- Video not watched in full -->
-            <% if (formStatus === "!video") { %>
-            <script>
-                alert("Indictuction Unsuccessful - please watch the video in full");
-            </script>
-            <% } %>
-
-            <!-- Invalid ID/Passport -->
-            <% if (formStatus === "!id_passport") { %>
-            <script>
-                alert("Indictuction Unsuccessful - the provided ID/Passport number is not valid");
-            </script>
-            <% } %>
-
-            <!-- Invalid Employee Number -->
-            <% if (formStatus === "!employee_nr") { %>
-            <script>
-                alert("Indictuction Unsuccessful - the provided employee number is not valid");
-            </script>
-            <% } %>
+            
 
         </div>
     </main>

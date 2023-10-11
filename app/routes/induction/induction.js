@@ -37,7 +37,7 @@ module.exports = (db) => {
     router.get("/", (req, res) => {
 
         // use template.ejs as base, and insert induction.ejs into the template page
-        res.status(200).render("template", {title: "FSOil Induction", contentPath: "induction", formStatus: "None"});
+        res.status(200).render("template", {title: "FSOil Induction", contentPath: "induction",  check: null});
         console.log("Induction.ejs rendered " + new Date() )
     });
 
@@ -50,45 +50,56 @@ module.exports = (db) => {
 
         
         // Check the data to see if it is valid
+        const check = {
+            status: "",
+            message: "",
+        }
 
         // Is the video watched in full?
         if (!req.body.videoWatched) {
-            res.render("template", {title: "FSOil Induction", contentPath: "induction", formStatus: "!video"});
+            check.status = "Video not fully watched!";
+            check.message = "Please make sure you watch the video before submitting the form."
         }
 
         // Is the ID/Passport number provided valid?
         ID = req.body.id_passport_nr;
         if (!validateSAIDNumber(ID)) {
             if (ID.length > 15 || ID.length < 6) {
-                res.render("template", {title: "FSOil Induction", contentPath: "induction", formStatus: "!id_passport"});
+                 check.status = "Id/Passport not valid!"
+                 check.message = "Please check that you insert a valid South African ID or passport number."
             }
         }
 
         // If an employee number is provided, is it valid?
         if (req.body.employeeNumber) {
             if (!+req.body.employeeNumber) {
-                res.render("template", {title: "FSOil Induction", contentPath: "induction", formStatus: "!employee_nr"});
+                check.status = "Employee number not valid!"
+                check.message = "Please check taht you insert a valid employee number - do not append any letters."
             }
         }
         
         
+        if (check.message == "") {
+        // Create an array with data to be inserted into the database
+            const data = [req.body.id_passport_nr, req.body.full_names, req.body.employee_nr, req.body.videoWatched];
 
-       // Create an array with data to be inserted into the database
-        const data = [req.body.id_passport_nr, req.body.full_names, req.body.employee_nr, req.body.videoWatched];
+            // Get the database connection from app.js
+            const db = req.app.get("db")
+            console.log(db);
 
-        // Get the database connection from app.js
-        const db = req.app.get("db")
-        console.log(db);
+            // insert data into database 
+            db.run(`INSERT INTO inductions (id_passport_nr, full_name, employee_nr, video_Watched) VALUES (?, ?, ?, ?)`, data, function(error) {
+                if(error) {
+                    return console.log(error.message);
+                }
+                // get the last insert id
+                console.log(`A row has been inserted with rowid ${this.lastID}`);
+            });
+            check.status = "Success!";
+            check.message = "You have successfully performed the induction."
+        };
 
-        // insert data into database 
-        db.run(`INSERT INTO inductions (id_passport_nr, full_name, employee_nr, video_Watched) VALUES (?, ?, ?, ?)`, data, function(error) {
-            if(error) {
-                return console.log(error.message);
-            }
-            // get the last insert id
-            console.log(`A row has been inserted with rowid ${this.lastID}`);
-        });
-        res.render("template", {title: "FSOil Induction", contentPath: "induction", formStatus: "success"});
+        res.render("template", {title: "FSOil Induction", contentPath: "induction", check});
     });
 
     return router;
