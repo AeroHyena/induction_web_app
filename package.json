@@ -5,7 +5,6 @@
     "node": ">=20.7.0"
   },
   "private": true,
-
   "dependencies": {
     "ejs": "^3.1.9",
     "express": "^4.18.2",
@@ -16,10 +15,12 @@
   },
   "scripts": {
     "jsdoc": "jsdoc -c jsdoc.json",
-    "start": "node app/app.js"
+    "start": "node app/app.js",
+    "devStart": "nodemon app/app.js"
   },
   "devDependencies": {
     "jest": "^29.7.0",
+    "nodemon": "^3.0.1",
     "supertest": "^6.3.3"
   }
 }

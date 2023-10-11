@@ -1,0 +1,15 @@
+<!-- This is where users can search the database
+to see if an individual has already performed their induction,
+and if the induction has expried yet. -->
+
+<main>
+    <div id="search" class="contentContainer">
+        <h3> Enter an ID/Passport number to search for an induction record:</h3>
+        <form action="/search" method="POST">
+            <input type=" text" name="id_passport" class="formInput" autocomplete="ID/Passport" required>
+            <button type="submit">submit</button> 
+        </form>
+    </div>
+
+    <div id="results" class="contentContainer">No results to display</div>
+</main>

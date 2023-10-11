@@ -67,15 +67,15 @@ app.set("views", path.join(__dirname, "pages")); // Set the directory of web fil
 
 // Import route modules and pass in the database connec connection to the route modules 
 const inductionRoutes = require("./routes/induction/induction")(app);
-//const searchRoutes = require("./routes/search/search.js")(db);
-//const reportsRoutes = require("./routes/reports/reports.js")(db);
-//const loginRoutes = require("./routes/login/login.js")(db);
-//const logoutRoutes = require("./routes/logout/logout.js")(db);
+const searchRoutes = require("./routes/search/search.js")(app);
+//const reportsRoutes = require("./routes/reports/reports.js")(app);
+//const loginRoutes = require("./routes/login/login.js")(app);
+//const logoutRoutes = require("./routes/logout/logout.js")(app);
 
 
 // Use the Route modules
 app.use("/", inductionRoutes);
-//app.use("/search", searchRoutes);
+app.use("/search", searchRoutes);
 //app.use("/reports", reportsRoutes);
 //app.use("/login", loginRoutes);
 //app.use("/logout", logoutRoutes);

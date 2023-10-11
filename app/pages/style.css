@@ -133,3 +133,21 @@ button {
     margin-left: 25px;
     margin-top: 10px;
 }
+
+
+a {
+    /* reset links to have no styling */
+    font-size: none;
+    font-family: none;
+    color: black;
+    font-style: none;
+    text-decoration: none;
+}
+
+
+/* search.ejs styling */
+#results {
+    min-height: 50vh;
+    
+    border: 1px solid lightgray;
+}
