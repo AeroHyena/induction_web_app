@@ -16,8 +16,7 @@ and if the induction has expried yet. -->
         <!-- If there has been a search query, render the returned data, or an appropriate fail message-->
         <% if (!dataGiven) { %>
             <p>No data to display</p>
-        <% } %>
-        <% if (data.length === 0 && dataGiven === true) { %>
+        <% } else if (data.length === 0 && dataGiven === true) { %>
             <p>No data for your search query has been found.</p>
         <% } else { %>
             <div class="dataObject" id="resultTitles">
