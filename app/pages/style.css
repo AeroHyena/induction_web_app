@@ -149,9 +149,9 @@ a {
 #results {
     display: flex;
     flex-direction: column;
+    padding: 25px;
     min-height: 50vh;
-    width: 100%;
-    
+    width: calc(99vw - 100px);
     border: 1px solid lightgray;
 }
 
@@ -159,8 +159,18 @@ a {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+
+    padding: 10px;;
+    height: 20vh;
 }
 
 .dataObject div{
     flex: 1;
+}
+
+#resultTitles {
+    height: 2vh;
+    width: auto;
+    
+    border-bottom: 1px solid lightgray;
 }

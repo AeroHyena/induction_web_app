@@ -14,24 +14,30 @@ and if the induction has expried yet. -->
 
     <div id="results" class="contentContainer">
         <!-- If there has been a search query, render the returned data, or an appropriate fail message-->
-            <% if (!dataGiven) { %>
-                <p>No data to display</p>
-            <% } %>
-            <% if (data.length === 0 && dataGiven === true) { %>
-                <p>No data for your search query has been found.</p>
-            <% } else { %>
-                <% data.forEach(item => { %>
-                    <div class="dataObject">
-                        <div><%= item.full_name %></div>
-                        <div><%= item.id_passport_nr %></div>
-                        <div><%= item.video_watched %></div>
-                        <div><% if (item.employee_nr) { %>
-                            Employee
-                        <% } else { %>
-                            Guest
-                        <% } %></div>
-                    </div>
-                <% }); %>
-            <% } %>
+        <% if (!dataGiven) { %>
+            <p>No data to display</p>
+        <% } %>
+        <% if (data.length === 0 && dataGiven === true) { %>
+            <p>No data for your search query has been found.</p>
+        <% } else { %>
+            <% data.forEach(item => { %>
+                <div class="dataObject" id="resultTitles">
+                    <div>Full Names</div>
+                    <div>ID/Passport</div>
+                    <div>Video Watched</div>
+                    <div>Employee/Guest</div>
+                </div>
+                <div class="dataObject">
+                    <div><%= item.full_name %></div>
+                    <div><%= item.id_passport_nr %></div>
+                    <div><%= item.video_watched %></div>
+                    <div><% if (item.employee_nr) { %>
+                        Employee
+                    <% } else { %>
+                        Guest
+                    <% } %></div>
+                </div>
+            <% }); %>
+        <% } %>
     </div>
 </main>

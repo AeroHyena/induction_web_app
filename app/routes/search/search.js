@@ -32,15 +32,10 @@ module.exports = (db) => {
             WHERE id_passport_nr = ?`, req.body.id_passport, (err, rows) => {
                 if (err) {
                     console.error(err.message);
-                } else {
-                    if (!rows.length) {
-                        res.send("No record found");
-                    } else {
-                        // Send data to the page to be rendered
-                        res.status(200).render("template", {title: "Search Records", contentPath: "search", "data": rows, "dataGiven": true});
-                        console.log("search.ejs rendered w/ database query data" + new Date());
-                        console.log(rows);
-                    };
+                } else {       
+                    res.status(200).render("template", {title: "Search Records", contentPath: "search", "data": rows, "dataGiven": true});
+                    console.log("search.ejs rendered w/ database query data" + new Date());
+                    console.log(rows);
                 };
             });
         });
