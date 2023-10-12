@@ -16,6 +16,10 @@ h1, h2, h3 {
     margin: 25px;
 }
 
+h3 {
+    font-size: 3vh;
+}
+
 
 #videoContainer {
     margin: 2vw;
@@ -35,6 +39,7 @@ h1, h2, h3 {
     flex-direction: column;
     max-width: 100vw; /* 100vw = 100% of the viewport width */
     height: auto;
+    padding: 2vw;
 }
 
 
@@ -42,10 +47,10 @@ header {
     /* define the header as a container for all header sub-elements */
     display: flex;
     flex-direction: row;
-    padding: 10px 100px;  /* top/bottom margins are 10px and left/right margins are 100px */
-    max-width: calc(100vw - 200px);  /* compensate for left and right padding. Use calc to subtract padding from the viewport width */
+    padding: 1vw 10vw;  /* top/bottom margins are 10px and left/right margins are 100px */
+    max-width: calc(100vw - 20vw);  /* compensate for left and right padding. Use calc to subtract padding from the viewport width */
     /* width: 100%; */
-    height: 20%;
+    height: 14vh;
 
     /* define the style for the header and it's children */
     border-bottom: 1px solid lightgray;
@@ -104,7 +109,7 @@ footer {
 
 
 .logo {
-    height: 100px;
+    height: 12vh;
 }
 
 
@@ -124,8 +129,7 @@ footer {
 
 .contentContainer {
     /* define laybout and styling for page content containers */
-    margin: 25px;
-    width: calc(100vw - 50px);
+    width: calc(100vw - 4vw);
 }
 
 
@@ -149,9 +153,9 @@ a {
 #results {
     display: flex;
     flex-direction: column;
-    padding: 25px;
+    padding: 2vw;
     min-height: 50vh;
-    width: calc(99vw - 100px);
+    width: calc(100vw - 10vw); /* viewport width - padding values */
     border: 1px solid lightgray;
 }
 
@@ -160,7 +164,6 @@ a {
     flex-direction: row;
     justify-content: space-between;
     padding: 2vh;
-
     border-bottom: 1px solid lightgray;
     font-size: 2vh;
 }
@@ -176,6 +179,4 @@ a {
 #resultTitles {
     height: 5vh;
     width: auto;
-    
-    border-bottom: 1px solid lightgray;
 }
