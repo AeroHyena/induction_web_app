@@ -125,13 +125,34 @@ module.exports = (db) => {
             /** Get the database connection from app.js */
             const db = req.app.get("db")
 
-            /** Insert the data into the database. This is an SQLite query that will insert the data */ 
-            db.run(`INSERT INTO inductions (id_passport_nr, full_name, employee_nr, video_Watched) VALUES (?, ?, ?, ?)`, data, function(error) {
+            /** Check if there is already data inside the database for this user */ 
+            db.get(`SELECT * FROM inductions
+            WHERE id_passport_nr LIKE ?`, data[0], function(error, row) {
                 if(error) {
                     return console.log(error.message);
-                }
-                /** Get the last insert id, and print it in the console */
-                console.log(`A row has been inserted with ID ${this.lastID}`);
+                } else {
+                    let checked = row;
+                    console.log("data found in db: ", checked)
+                    /** If there is no record, add a new one */
+                    if (typeof(checked) == "undefined") {
+                        db.run(`INSERT INTO inductions (id_passport_nr, full_name, employee_nr, video_Watched) 
+                        VALUES (?, ?, ?, ?)`, data, function(error) {
+                            if(error) {
+                                return console.log(error.message);
+                            }
+                            console.log("A new entry has been made into the database with ID " + this.lastID);
+                    })} else {
+
+                        /** If there is an existing record, update it */
+                        db.run(`UPDATE inductions SET (id_passport_nr, full_name, employee_nr, video_Watched)
+                        = (?, ?, ?, ?)  WHERE id = ${checked.id}`, data, function(error) {
+                            if(error) {
+                                return console.log(error.message);
+                            }
+                            console.log("An entry in the database has been updated (ID = " + checked.id + ")");
+                        });
+                    };
+                };
             });
             check.status = "Success!";
             check.message = "You have successfully performed the induction.";
