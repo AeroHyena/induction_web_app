@@ -117,35 +117,47 @@ module.exports = (db) => {
                 check.code = 422;
             }
         }
+
         
         /** If the data checks have not found any erros, commit the data into the database */
         if (check.message == "") {
             const data = [req.body.id_passport_nr, req.body.full_names, req.body.employee_nr, req.body.videoWatched];
 
+
             /** Get the database connection from app.js */
             const db = req.app.get("db")
+
 
             /** Check if there is already data inside the database for this user */ 
             db.get(`SELECT * FROM inductions
             WHERE id_passport_nr LIKE ?`, data[0], function(error, row) {
+
                 if(error) {
                     return console.log(error.message);
+
+
                 } else {
                     let checked = row;
-                    console.log("data found in db: ", checked)
+                    console.log("data found in db: ", checked);
+
+
                     /** If there is no record, add a new one */
                     if (typeof(checked) == "undefined") {
                         db.run(`INSERT INTO inductions (id_passport_nr, full_name, employee_nr, video_Watched) 
                         VALUES (?, ?, ?, ?)`, data, function(error) {
+
+
                             if(error) {
                                 return console.log(error.message);
                             }
                             console.log("A new entry has been made into the database with ID " + this.lastID);
-                    })} else {
 
+
+                    })} else {
                         /** If there is an existing record, update it */
                         db.run(`UPDATE inductions SET (id_passport_nr, full_name, employee_nr, video_Watched)
                         = (?, ?, ?, ?)  WHERE id = ${checked.id}`, data, function(error) {
+
                             if(error) {
                                 return console.log(error.message);
                             }
@@ -154,10 +166,13 @@ module.exports = (db) => {
                     };
                 };
             });
+
+            
             check.status = "Success!";
             check.message = "You have successfully performed the induction.";
             check.code = 201;
         };
+
 
         /** 
          * Render the page and provide the reults. The induction.ejs page 
