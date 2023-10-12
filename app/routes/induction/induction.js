@@ -53,28 +53,32 @@ module.exports = (db) => {
         const check = {
             status: "",
             message: "",
+            code: 0
         }
 
         // Is the video watched in full?
         if (!req.body.videoWatched) {
             check.status = "Video not fully watched!";
-            check.message = "Please make sure you watch the video before submitting the form."
+            check.message = "Please make sure you watch the video before submitting the form.";
+            check.code = 422;
         }
 
         // Is the ID/Passport number provided valid?
         ID = req.body.id_passport_nr;
         if (!validateSAIDNumber(ID)) {
             if (ID.length > 15 || ID.length < 6) {
-                 check.status = "Id/Passport not valid!"
-                 check.message = "Please check that you insert a valid South African ID or passport number."
+                 check.status = "Id/Passport not valid!";
+                 check.message = "Please check that you insert a valid South African ID or passport number.";
+                 check.code = 422;
             }
         }
 
         // If an employee number is provided, is it valid?
         if (req.body.employeeNumber) {
             if (!+req.body.employeeNumber) {
-                check.status = "Employee number not valid!"
-                check.message = "Please check taht you insert a valid employee number - do not append any letters."
+                check.status = "Employee number not valid!";
+                check.message = "Please check taht you insert a valid employee number - do not append any letters.";
+                check.code = 422;
             }
         }
         
@@ -96,10 +100,11 @@ module.exports = (db) => {
                 console.log(`A row has been inserted with rowid ${this.lastID}`);
             });
             check.status = "Success!";
-            check.message = "You have successfully performed the induction."
+            check.message = "You have successfully performed the induction.";
+            check.code = 201;
         };
 
-        res.render("template", {title: "FSOil Induction", contentPath: "induction", check});
+        res.status(check.code).render("template", {title: "FSOil Induction", contentPath: "induction", check});
     });
 
     return router;

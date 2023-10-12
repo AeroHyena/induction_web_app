@@ -27,14 +27,13 @@ html {
     }
 }
 
-
 h1, h2, h3 {
     /* define margins for title elements */
     margin: 25px;
 }
 
 h3 {
-    font-size: 3vh;
+    font-size: 2rem;
 }
 
 
