@@ -1,4 +1,8 @@
-/** 
+/**
+ * @module app
+ * 
+ * @summary Entry point. Sets up tools, the server, and holds all routes.
+ * 
  * @overview This is the entry point for the web app.
  * In this file an express app is created, and all route modules from 
  * app/routes are imported and set up.
@@ -12,18 +16,22 @@
  * files - media content - is served.
  */
 
-// Imports
+
+
+
+/** Imports */
 const path = require("path");
 const express = require("express");
 const sqlite3 = require('sqlite3').verbose();
 
 
 
-
-// Set up the sqlite3 database
+/** Set up the sqlite3 database */
 const db = new sqlite3.Database('database.db'); //create the database
 
-// Create a table for induction data
+
+/** Connect to the database, and create a table for induction data 
+ * if one doesn't exist */
 db.run(`
   CREATE TABLE IF NOT EXISTS inductions (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -44,29 +52,27 @@ db.run(`
 
 
 
-// Set up the express app to be used
+/** Set up the express app to be used */
 const app = express();
 app.use(express.static(path.join(__dirname, "/pages"))); // Serve static files from the pages directory
 app.use(express.urlencoded({extended: true })); //parse URL-encoded data
 app.set('db', db); // Set the database in the app
 
 
+
 /** @default The server is served on the PORT environment variable, or on 8080 by default. */
 const port = process.env.PORT || 8080;
 
 
-// Set up the ejs template engine
+
+/** Set up the ejs template engine */
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "pages")); // Set the directory of web files as /pages
 
 
 
 
-
-
-
-
-// Import route modules and pass in the database connec connection to the route modules 
+/** Import route modules and pass in the database connec connection to the route modules */
 const inductionRoutes = require("./routes/induction/induction")(app);
 const searchRoutes = require("./routes/search/search.js")(app);
 //const reportsRoutes = require("./routes/reports/reports.js")(app);
@@ -74,7 +80,8 @@ const searchRoutes = require("./routes/search/search.js")(app);
 //const logoutRoutes = require("./routes/logout/logout.js")(app);
 
 
-// Use the Route modules
+
+/** Use the Route modules */
 app.use("/", inductionRoutes);
 app.use("/search", searchRoutes);
 //app.use("/reports", reportsRoutes);
@@ -82,11 +89,8 @@ app.use("/search", searchRoutes);
 //app.use("/logout", logoutRoutes);
 
 
-// launch server
+
+/** launch server on the specified port, and on host 0.0.0.0 */
 app.listen(port, "0.0.0.0", () => {
     console.log("server is running on port " + port);
 });
-
-
-
-module.exports = app;

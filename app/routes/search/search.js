@@ -1,3 +1,19 @@
+/** 
+ * @route for "/search"
+ * @module Search
+ * 
+ * @summary Defines route for inductions @"/search"
+ * @overview This is an express route for performing searches on the induction database.
+ * 
+ * There is a search bar, and a results area.
+ * 
+ * The results area is updated with data as searches are performed.
+ * --TODO-- add the ability to select different collumns for search
+ */
+
+
+
+/* imports and set up*/
 const express = require("express");
 const { todo } = require("node:test");
 const router = express.Router();
@@ -5,12 +21,20 @@ const router = express.Router();
 
 
 
-/** Export the routes with the db as a paramater
- * @param database - a database connection passed down from app.js
+/** 
+ * @function module.exports
+ * @summary Export the routes with the db as a paramater
+ * @overview GET and POST routes are defined for the search page.
+ * 
+ * Get will render the search web page with a search bar and a results pane.
+ * 
+ * POST is used to perform the search and to return the results.
+ * 
+ * @param db - a database connection to database.db passed down from app.js
+ * @returns The router used to set up the GET and POST routes
  */
 module.exports = (db) => {
-
-    // Define routes for induction page functionalities
+    /** GET route - renders the page */
     router.get("/", (req, res) => {
 
         // use template.ejs as base, and insert search.ejs into the template page
@@ -19,20 +43,21 @@ module.exports = (db) => {
     });
 
 
+    /** POST route - performs the search, adn renders the page with the results. */
     router.post("/", (req, res) => {
-        // Handle search queries here
 
-        // Get the database
+        /** Get the database connection from app.js */
         const db = req.app.get("db")
-        
-        console.log(req.body.id_passport);
-        // Query the database
+
+
+        /** Execute a query on the database with the provided parameters */
         db.serialize(() => {
             db.all(`SELECT * FROM inductions
             WHERE id_passport_nr = ?`, req.body.id_passport, (err, rows) => {
                 if (err) {
                     console.error(err.message);
                 } else {       
+                    /** Render the page with the results */
                     res.status(200).render("template", {title: "Search Records", contentPath: "search", "data": rows, "dataGiven": true});
                     console.log("search.ejs rendered w/ database query data" + new Date());
                     console.log(rows);
