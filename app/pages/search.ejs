@@ -4,10 +4,15 @@ and if the induction has expried yet. -->
 
 <main>
     <div id="search" class="contentContainer">
-        <h3> Enter an ID/Passport number to search for an induction record:</h3>
+        <h3> Select anoption from the drop down menu, and enter the value you want to search:<h3>
         <form action="/search" method="POST">
-            <input type=" text" name="id_passport" class="formInput" autocomplete="ID/Passport" required>
-            <button type="submit">submit</button> 
+            <select id="searchOption" name="option">
+                <option value="id_passport_nr">ID/Passport</option>
+                <option value="full_name">Name/Surname</option>
+                <option value="employee_nr">Employee Number</option>
+              </select>
+            <input type=" text" name="value" class="formInput" placeholder="Value" required>
+            <button type="submit">search</button> 
         </form>
     </div>
 

@@ -49,11 +49,13 @@ module.exports = (db) => {
         /** Get the database connection from app.js */
         const db = req.app.get("db")
 
+        console.log(req.body)
+
 
         /** Execute a query on the database with the provided parameters */
         db.serialize(() => {
             db.all(`SELECT * FROM inductions
-            WHERE id_passport_nr = ?`, req.body.id_passport, (err, rows) => {
+            WHERE ${req.body.option}  LIKE ?`, [`%${req.body.value}%`], (err, rows) => {
                 if (err) {
                     console.error(err.message);
                 } else {       
