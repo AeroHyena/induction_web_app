@@ -27,6 +27,7 @@ const db = new sqlite3.Database('database.db'); //create the database
 db.run(`
   CREATE TABLE IF NOT EXISTS inductions (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
+    date_completed DATE DEFAULT CURRENT_TIMESTAMP,
     id_passport_nr TEXT NOT NULL,
     full_name TEXT NOT NULL,
     employee_nr INTEGER UNIQUE,

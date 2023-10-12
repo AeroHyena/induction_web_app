@@ -20,13 +20,17 @@ and if the induction has expried yet. -->
             <p>No data for your search query has been found.</p>
         <% } else { %>
             <div class="dataObject" id="resultTitles">
+                <div>Date Completed</div>
+                <div>Status</div>
                 <div>Full Names</div>
                 <div>ID/Passport</div>
                 <div>Video Watched</div>
                 <div>Employee/Guest</div>
             </div>
             <% data.forEach(item => { %>
-                <div class="dataObject">
+                <div class="dataObject dataEntry">
+                    <div class="dateCompleted"><%= item.date_completed %></div>
+                    <div class="status">-</div>
                     <div><%= item.full_name %></div>
                     <div><%= item.id_passport_nr %></div>
                     <div><%= item.video_watched %></div>
@@ -40,3 +44,5 @@ and if the induction has expried yet. -->
         <% } %>
     </div>
 </main>
+
+<script src="scripts/search_formatter.js"></script>

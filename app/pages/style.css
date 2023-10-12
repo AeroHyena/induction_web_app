@@ -159,13 +159,18 @@ a {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    /* padding: 10px; */
-    /* height: 5vh; */
+    padding: 2vh;
+
+    border-bottom: 1px solid lightgray;
+    font-size: 2vh;
 }
 
 .dataObject div{
     flex: 1;
-    height: 5vh;
+}
+
+.dataEntry:hover {
+    background-color: lightgray;
 }
 
 #resultTitles {
