@@ -41,7 +41,7 @@ module.exports = (db) => {
     /** GET route - renders the page */
     router.get("/", (req, res) => {
 
-        // use template.ejs as base, and insert search.ejs into the template pagec
+        // use template.ejs as base, and insert search.ejs into the template page
 
         if (!req.query.error) {
             res.status(200).render("template", {loggedIn: req.session.isLoggedIn, title: "Log In", contentPath: "login"});
@@ -65,7 +65,12 @@ module.exports = (db) => {
             if (err) { 
               return next(err); 
             }
+
             req.session.isLoggedIn = true;
+            req.session.username = user.username;
+            req.session.user_id = user.id;
+            console.log(user.username + " is logged in successfully");
+
             return res.redirect('/');
           });
         })(req, res, next);
