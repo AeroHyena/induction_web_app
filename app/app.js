@@ -26,6 +26,7 @@ const passport = require("passport");
 const bcrypt = require("bcryptjs");
 const LocalStrategy = require('passport-local').Strategy;
 const crypto = require('crypto');
+const RateLimit = require("express-rate-limit");
 
 
 /** Handle environment variables */
@@ -126,8 +127,13 @@ passport.deserializeUser(function(id, done) {
 
 
 
+/** Set up rate limiter */
+const limiter = RateLimit({
+  windowsMs: 15 * 60 * 1000, // 15 mins
+  max: 100, // max 100 request per windowsMs
+});
 
-
+app.use(limiter);
 
 
 /** Import route modules and pass in the database connec connection to the route modules */
