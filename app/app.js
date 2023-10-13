@@ -76,7 +76,7 @@ app.set("views", path.join(__dirname, "pages")); // Set the directory of web fil
 const inductionRoutes = require("./routes/induction/induction")(app);
 const searchRoutes = require("./routes/search/search.js")(app);
 //const reportsRoutes = require("./routes/reports/reports.js")(app);
-//const loginRoutes = require("./routes/login/login.js")(app);
+const loginRoutes = require("./routes/login/login.js")(app);
 //const logoutRoutes = require("./routes/logout/logout.js")(app);
 
 
@@ -85,7 +85,7 @@ const searchRoutes = require("./routes/search/search.js")(app);
 app.use("/", inductionRoutes);
 app.use("/search", searchRoutes);
 //app.use("/reports", reportsRoutes);
-//app.use("/login", loginRoutes);
+app.use("/login", loginRoutes);
 //app.use("/logout", logoutRoutes);
 
 
