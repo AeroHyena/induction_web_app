@@ -73,8 +73,10 @@ module.exports = (db) => {
     router.get("/", (req, res) => {
 
         /** use template.ejs as base, and insert induction.ejs into the template page */
-        res.status(200).render("template", {title: "FSOil Induction", contentPath: "induction",  check: null});
+        res.status(200).render("template", {loggedIn: req.session.isLoggedIn, title: "FSOil Induction",
+            contentPath: "induction",  check: null});
         console.log("Induction.ejs rendered " + new Date() )
+        console.log("User login status: ", req.session.isLoggedIn);
     });
 
     /** POST route - handle form submissions */
@@ -178,7 +180,7 @@ module.exports = (db) => {
          * Render the page and provide the reults. The induction.ejs page 
          * will handle the result and render the appropriate alert.
          * */
-        res.status(check.code).render("template", {title: "FSOil Induction", contentPath: "induction", check});
+        res.status(check.code).render("template", {loggedIn: req.session.isLoggedIn, title: "FSOil Induction", contentPath: "induction", check});
         console.log("The data and its result has been rendered: \n", check);
     });
 

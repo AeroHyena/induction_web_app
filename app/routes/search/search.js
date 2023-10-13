@@ -38,8 +38,13 @@ module.exports = (db) => {
     router.get("/", (req, res) => {
 
         // use template.ejs as base, and insert search.ejs into the template page
-        res.status(200).render("template", {title: "Search Records", contentPath: "search", "data": [], "dataGiven": false});
-        console.log("search.ejs rendered " + new Date());
+        if (req.session.isLoggedIn) {
+            res.status(200).render("template", {loggedIn: req.session.isLoggedIn, title: "Search Records", contentPath: "search", "data": [], "dataGiven": false});
+            console.log("search.ejs rendered " + new Date());
+        } else {
+            res.redirect("/");
+            console.log("redirected from /search - no user logged in");
+        }
     });
 
 
@@ -59,7 +64,7 @@ module.exports = (db) => {
                     console.error(err.message);
                 } else {       
                     /** Render the page with the results */
-                    res.status(200).render("template", {title: "Search Records", contentPath: "search", "data": rows, "dataGiven": true});
+                    res.status(200).render("template", {loggedIn: req.session.isLoggedIn, title: "Search Records", contentPath: "search", "data": rows, "dataGiven": true});
                     console.log("search.ejs rendered w/ database query data" + new Date());
                     console.log(rows);
                 };

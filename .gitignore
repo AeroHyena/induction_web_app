@@ -1,1 +1,4 @@
 documentation/**
+/node_modules
+generate_pass.js
+

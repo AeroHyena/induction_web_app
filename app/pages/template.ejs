@@ -33,15 +33,21 @@ with a space where unique page data for each route will be inserted. -->
     <nav id="nav_bar">
         <!-- At the left-hand side of the header -->
         <div class="navElement"><a href="/">Induction</a></div>
-        <div class="navElement"><a href="/search">Search</a></div>
-        <div class="navElement">Reports</div>
+        <% if (loggedIn) { %>
+            <div class="navElement"><a href="/search">Search</a></div>
+            <div class="navElement">Reports</div>
+        <% } %>
 
         <!-- filler element to consume center space -->
         <div class="navFiller"> </div>
 
         <!-- At the right-hand side of the header -->
-        <div class="navElement"><a href="/login">Login</a></div>
-        <div class="navElement">Logout</div>
+        <% if (!loggedIn) { %>
+            <div class="navElement"><a href="/login">Login</a></div>
+        <% } else { %>
+            <div class="navElement">Dashboard</div>
+            <div class="navElement">Logout</div>
+        <% } %>
     </nav>
 
 

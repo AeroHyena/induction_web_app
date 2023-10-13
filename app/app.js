@@ -17,12 +17,19 @@
  */
 
 
-
-
 /** Imports */
 const path = require("path");
 const express = require("express");
 const sqlite3 = require('sqlite3').verbose();
+const session = require("express-session");
+const passport = require("passport");
+const bcrypt = require("bcryptjs");
+const LocalStrategy = require('passport-local').Strategy;
+const crypto = require('crypto');
+
+
+/** Handle environment variables */
+const SECRET_KEY = crypto.randomBytes(256).toString("hex");
 
 
 
@@ -59,15 +66,66 @@ app.use(express.urlencoded({extended: true })); //parse URL-encoded data
 app.set('db', db); // Set the database in the app
 
 
+/** Set up session middleware */
+app.use(session({
+  secret: SECRET_KEY,
+  resave: false,
+  saveUninitialized: false,
+}))
+
+
+/** Set up passport.js */
+app.use(passport.initialize());
+app.use(passport.session());
+
 
 /** @default The server is served on the PORT environment variable, or on 8080 by default. */
 const port = process.env.PORT || 8080;
 
 
-
 /** Set up the ejs template engine */
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "pages")); // Set the directory of web files as /pages
+
+// validate password
+function validatePass(hash) {
+  bcrypt.compareSync(password, hash)
+}
+// passport localstrategy setup
+passport.use(new LocalStrategy(
+  {
+     usernameField: "username",
+     passwordField: "password"
+  },
+  function(username, password, done) {
+    
+    db.get(`SELECT * FROM users WHERE username = ?`, username, (err, row) => {
+      console.log(row)
+       if (!row) {
+          return done(null, false, { message: "User does not exist" });
+       }
+       if (!bcrypt.compareSync(password, row.password)) {
+          return done(null, false, { message: "Password is not valid." });
+       }
+       
+       return done(null, row);
+    });
+  }
+));
+
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done) {
+  db.get(`SELECT * FROM users WHERE id = ?`, id, (err, row) => {
+    if (err) { return done(err); }
+    done(null, row);
+  });
+});
+
+
+
 
 
 

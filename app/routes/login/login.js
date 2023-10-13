@@ -13,9 +13,11 @@
 
 
 /* imports and set up*/
+const { REFUSED } = require("dns");
 const express = require("express");
 const { todo } = require("node:test");
 const router = express.Router();
+const passport = require("passport")
 
 
 
@@ -35,24 +37,39 @@ const router = express.Router();
 
 
 module.exports = (db) => {
-    
+
     /** GET route - renders the page */
     router.get("/", (req, res) => {
 
-        // use template.ejs as base, and insert search.ejs into the template page
-        res.status(200).render("template", {title: "Log In", contentPath: "login"});
-        console.log("Login.ejs rendered " + new Date());
+        // use template.ejs as base, and insert search.ejs into the template pagec
+
+        if (!req.query.error) {
+            res.status(200).render("template", {loggedIn: req.session.isLoggedIn, title: "Log In", contentPath: "login"});
+        } else {
+            res.send("Error logging in" + req.query.error);
+        };
+        console.log("Login.ejs rendered " + new Date() + req.query.error);
     });
 
 
     /** POST route - validates the credentials, and renders the page with the result. */
-    router.post("/", (req, res) => {
-
-        /** Get the database connection from app.js */
-        const db = req.app.get("db");
-        console.log("POST detected on /search");
-
-    });
+    router.post('/', function(req, res, next) {
+        passport.authenticate('local', function(err, user, info) {
+          if (err) { 
+            return next(err); 
+          }
+          if (!user) { 
+            return res.redirect('/login?error=Invalid username or password'); 
+          }
+          req.logIn(user, function(err) {
+            if (err) { 
+              return next(err); 
+            }
+            req.session.isLoggedIn = true;
+            return res.redirect('/');
+          });
+        })(req, res, next);
+      });
 
     return router;
 };

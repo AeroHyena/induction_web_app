@@ -1,16 +1,20 @@
 {
   "name": "freestate-oil-induction-app",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "engines": {
     "node": ">=20.7.0"
   },
   "private": true,
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "ejs": "^3.1.9",
     "express": "^4.18.2",
+    "express-session": "^1.17.3",
     "http-server": "^14.1.1",
     "jsdoc": "^4.0.2",
     "node": "^20.7.0",
+    "passport": "^0.6.0",
+    "passport-local": "^1.0.0",
     "sqlite3": "^5.1.6"
   },
   "scripts": {
