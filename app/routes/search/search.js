@@ -2,7 +2,7 @@
  * @route for "/search"
  * @module Search
  * 
- * @summary Defines route for inductions @"/search"
+ * @summary Defines route for performing searches @"/search"
  * @overview This is an express route for performing searches on the induction database.
  * 
  * There is a search bar, and a results area.
@@ -47,9 +47,8 @@ module.exports = (db) => {
     router.post("/", (req, res) => {
 
         /** Get the database connection from app.js */
-        const db = req.app.get("db")
-
-        console.log(req.body)
+        const db = req.app.get("db");
+        console.log("POST detected on /search");
 
 
         /** Execute a query on the database with the provided parameters */
