@@ -159,7 +159,7 @@ module.exports = (db) => {
 
         /** If the data checks have not found any errors, commit the data into the database */
         if (check.message == "") {
-            const data = [req.body.id_passport_nr, req.body.full_names, req.body.employee_nr, req.body.videoWatched];
+            const data = [req.body.id_passport_nr, req.body.full_names, req.body.employee_check, req.body.videoWatched];
             
 
             /** 

@@ -42,12 +42,14 @@ module.exports = (db) => {
     router.get("/", (req, res) => {
 
         
-        if (!req.query.error) { // In cases where login has failed
+        if (!req.query.error) { // In cases where there was no failed login attempt
 
             // use template.ejs as base, and insert search.ejs into the template page
-            res.status(200).render("template", {loggedIn: req.session.isLoggedIn, title: "Log In", contentPath: "login"});
+            res.status(200).render("template", {loggedIn: req.session.isLoggedIn, 
+              title: "Log In", contentPath: "login", error: null});
         } else {
-            res.send("Error logging in" + req.query.error);
+            res.status(200).render("template", {loggedIn: req.session.isLoggedIn, 
+              title: "Log In", contentPath: "login", error: req.query.error});
         };
         
         console.log("Login.ejs rendered " + new Date() + ", errors given: " + !(!req.query.error));
@@ -62,10 +64,10 @@ module.exports = (db) => {
           }
           if (!user) { 
             console.log("Login: @/post - Invalid username or password");
-            return res.redirect('/login?error=Invalid username or password'); 
+            return res.redirect("/login?error= Incorrect username or password"); 
           }
           req.logIn(user, function(err) {
-            if (err) { 
+            if (err) { ``
               return next(err); 
             }
 

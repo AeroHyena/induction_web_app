@@ -3,6 +3,15 @@ to see if an individual has already performed their induction,
 and if the induction has expried yet. -->
 
 <main>
+    <!-- Display an alert here if ther was a failed login attempt -->
+    <% if (error) { %> <div class="alert"> 
+        <div class="alert-content">
+            <p><%= error %></p>
+        </div>
+    </div>
+    <% } %>
+
+
     <div id="loginBox" class="contentContainer">
         <form action="/login" method="post">
             <section>

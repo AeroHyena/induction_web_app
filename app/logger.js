@@ -3,7 +3,7 @@
  * 
  * @summary Sets up a custom logging set up to catpure console logs and errors to an external file
  * 
- * @overview In this file WInston is set up.
+ * @overview In this file Winston is set up.
  * 
  * It captures console logs and errors, and stores it in /logs.
  * 

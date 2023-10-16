@@ -30,7 +30,7 @@ html {
 
 h1, h2, h3 {
     /* define margins for title elements */
-    margin: 25px;
+    margin: 2vw;
 }
 
 h3 {
@@ -208,4 +208,25 @@ a {
 #resultTitles {
     height: 5vh;
     width: auto;
+}
+
+.alert {
+    margin: 1vw;
+    width: calc(100vw - 4vw - 4vw);
+    background-color: #ffd68b;
+    border: 1px solid #FFA500;
+    border-radius: 10px;
+}
+
+.alert h3 {
+    font-size: 1.5rem;
+}
+
+.alert p {
+    margin: 2vw;
+    font-size: 1rem;
+}
+
+.hidden {
+    display: none;
 }
