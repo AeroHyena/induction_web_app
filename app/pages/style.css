@@ -230,3 +230,19 @@ a {
 .hidden {
     display: none;
 }
+
+
+.dashboard-item {
+    margin: 2vw;
+    padding: 2vh;
+    height: 20vh;
+
+    background-color: lightgray;
+    border: 2px solid gray;
+    border-radius: 10px;;
+}
+
+
+.dashboard-item:hover {
+    border-color: lightblue;
+}
