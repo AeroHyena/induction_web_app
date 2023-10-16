@@ -1,6 +1,6 @@
 {
   "name": "freestate-oil-induction-app",
-  "version": "2.4.0",
+  "version": "2.5.0",
   "engines": {
     "node": ">=18.18.0"
   },
@@ -16,7 +16,9 @@
     "node": "^20.7.0",
     "passport": "^0.6.0",
     "passport-local": "^1.0.0",
-    "sqlite3": "^5.1.6"
+    "sqlite3": "^5.1.6",
+    "winston": "^3.11.0",
+    "winston-daily-rotate-file": "^4.7.1"
   },
   "scripts": {
     "jsdoc": "jsdoc -c jsdoc.json",

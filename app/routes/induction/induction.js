@@ -162,7 +162,10 @@ module.exports = (db) => {
             const data = [req.body.id_passport_nr, req.body.full_names, req.body.employee_nr, req.body.videoWatched];
             
 
-            /** Check if there is already data inside the database for this user */ 
+            /** 
+             * Check if there is already data inside the database for this user - 
+             * Do this by utilizing the ID number since that must be unique for all users
+             * */ 
             db.get(`SELECT * FROM inductions
             WHERE id_passport_nr LIKE ?`, data[0], function(error, row) {
 

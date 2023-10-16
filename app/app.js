@@ -27,11 +27,12 @@ const crypto = require('crypto');
 const RateLimit = require("express-rate-limit");
 
 
-
+// Set up logger
+const {logger, requestLogger} = require("./logger");
 
 
 // Set up the app
-console.log("App: setting up ...");
+console.log("App: initializing set up ...");
 
 
 
@@ -61,7 +62,7 @@ db.serialize(() => {
     CREATE TABLE IF NOT EXISTS inductions (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       date_completed DATE DEFAULT CURRENT_TIMESTAMP,
-      id_passport_nr TEXT NOT NULL,
+      id_passport_nr TEXT NOT NULL UNIQUE,
       full_name TEXT NOT NULL,
       employee_nr INTEGER UNIQUE,
       video_watched TEXT NOT NULL
@@ -110,6 +111,7 @@ const app = express();
 app.use(express.static(path.join(__dirname, "/pages"))); // Serve static files from the pages directory
 app.use(express.urlencoded({extended: true })); //parse URL-encoded data
 app.set('db', db); // Set the database in the app
+app.use(requestLogger);
 
 
 
