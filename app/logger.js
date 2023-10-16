@@ -1,10 +1,29 @@
+/**
+ * @module logger
+ * 
+ * @summary Sets up a custom logging set up to catpure console logs and errors to an external file
+ * 
+ * @overview In this file WInston is set up.
+ * 
+ * It captures console logs and errors, and stores it in /logs.
+ * 
+ * It is set up to rotate so that logs are stored in a seperate file each day.
+ * The logger will hold on to log files for up to 31 days.
+ * 
+ * console.log is disabled to prevent double logging.
+ */
+
+
+/** Imports */
 const winston = require("winston");
 const DailyRotateFile = require("winston-daily-rotate-file");
 
 
-console.log = () => {}; // Disable console.log
+/** Disable console.log */
+console.log = () => {}; 
 
 
+/** Set up winston with a rotate file for combined logs, and one for errors */
 const logger = winston.createLogger({
     level: "info",
     format: winston.format.json(),
@@ -45,7 +64,10 @@ console.error = (...args) => {
 };
 
 
-// Create a function that returns the request logging middleware
+/**
+ * @function requestLogger
+ * @summary enables express to use the logger via app.use(logger)
+ */
 function requestLogger(req, res, next) {
     // Log request details using the Winston logger
     logger.info(`${req.method} ${req.url}`);
@@ -53,7 +75,7 @@ function requestLogger(req, res, next) {
   }
 
 
-
+/** Export the logger and requestLogger */
 module.exports = {
     logger,
     requestLogger,
