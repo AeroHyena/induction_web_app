@@ -34,44 +34,53 @@ const router = express.Router();
  * @returns The router used to set up the GET and POST routes
  */
 module.exports = (db) => {
+
+
     /** GET route - renders the page */
     router.get("/", (req, res) => {
+
 
         // use template.ejs as base, and insert search.ejs into the template page
         if (req.session.isLoggedIn) {
             res.status(200).render("template", {loggedIn: req.session.isLoggedIn, title: "Search Records", contentPath: "search", "data": [], "dataGiven": false});
-            console.log("search.ejs rendered " + new Date());
+            console.log("Search: @/get - search.ejs rendered @" + new Date());
         } else {
             res.redirect("/");
-            console.log("redirected from /search - no user logged in");
+            console.log("Search: @/get - redirected from /search - no user logged in @" + new Date());
         }
     });
 
 
-    /** POST route - performs the search, adn renders the page with the results. */
+    /** POST route - performs the search, and renders the page with the results. */
     router.post("/", (req, res) => {
+        if (req.session.isLoggedIn) {
 
-        /** Get the database connection from app.js */
-        const db = req.app.get("db");
-        console.log("POST detected on /search");
+            /** Get the database connection from app.js */
+            console.log("Search: @/get - post detected: reading search query ...");
+            let db = req.app.get("db");
 
 
-        /** Execute a query on the database with the provided parameters */
-        db.serialize(() => {
-            db.all(`SELECT * FROM inductions
-            WHERE ${req.body.option}  LIKE ?`, [`%${req.body.value}%`], (err, rows) => {
-                if (err) {
-                    console.error(err.message);
-                } else {       
-                    /** Render the page with the results */
-                    res.status(200).render("template", {loggedIn: req.session.isLoggedIn, title: "Search Records", contentPath: "search", "data": rows, "dataGiven": true});
-                    console.log("search.ejs rendered w/ database query data" + new Date());
-                    console.log(rows);
-                };
+            /** Execute a query on the database with the provided parameters */
+            db.serialize(() => {
+                db.all(`SELECT * FROM inductions
+                WHERE ${req.body.option}  LIKE ?`, [`%${req.body.value}%`], (err, rows) => {
+                    if (err) {
+                        console.error(err.message);
+                    } else {       
+                        /** Render the page with the results */
+                        res.status(200).render("template", {loggedIn: req.session.isLoggedIn, title: "Search Records", contentPath: "search", "data": rows, "dataGiven": true});
+                        console.log("Search: @/post - search.ejs rendered w/ database query data @" + new Date());
+                        console.log("Search: @/post - data retrieved: ", rows);
+                    };
+                });
             });
-        });
+        } else {
+            res.status(403).redirect("/");
+            console.log("Search : @/post - search request denied: no log in data found. User has been redirected to /");
+        }
 
     });
+    
 
     return router;
 };

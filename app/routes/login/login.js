@@ -41,14 +41,16 @@ module.exports = (db) => {
     /** GET route - renders the page */
     router.get("/", (req, res) => {
 
-        // use template.ejs as base, and insert search.ejs into the template page
+        
+        if (!req.query.error) { // In cases where login has failed
 
-        if (!req.query.error) {
+            // use template.ejs as base, and insert search.ejs into the template page
             res.status(200).render("template", {loggedIn: req.session.isLoggedIn, title: "Log In", contentPath: "login"});
         } else {
             res.send("Error logging in" + req.query.error);
         };
-        console.log("Login.ejs rendered " + new Date() + req.query.error);
+        
+        console.log("Login.ejs rendered " + new Date() + ", errors given: " + !(!req.query.error));
     });
 
 
@@ -59,6 +61,7 @@ module.exports = (db) => {
             return next(err); 
           }
           if (!user) { 
+            console.log("Login: @/post - Invalid username or password");
             return res.redirect('/login?error=Invalid username or password'); 
           }
           req.logIn(user, function(err) {
@@ -69,7 +72,7 @@ module.exports = (db) => {
             req.session.isLoggedIn = true;
             req.session.username = user.username;
             req.session.user_id = user.id;
-            console.log(user.username + " is logged in successfully");
+            console.log("Login: @/post - " + user.username + " is logged in successfully");
 
             return res.redirect('/');
           });

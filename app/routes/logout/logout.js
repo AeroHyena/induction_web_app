@@ -40,6 +40,7 @@ router.get("/", (req, res) => {
 
     // If a user is logged in, log them out
     if (req.session.isLoggedIn) {
+        console.log("Logout: @/get - Logout request recieved, logging user out ...");
 
         req.session.isLoggedIn = false;
         req.session.username = "";
@@ -49,7 +50,7 @@ router.get("/", (req, res) => {
         });
 
         res.redirect("/");
-        console.log("user is logged out successfully");
+        console.log("Logout: @/get - user is logged out successfully");
     } else {
         res.redirect("/");
     }
