@@ -38,7 +38,13 @@ module.exports = (db) => {
 
     /** GET route - renders the page */
     router.get("/", (req, res) => {
-        res.status(200).render("template", {loggedIn: req.session.isLoggedIn, title: "Dashboard", contentPath: "dashboard"});
+        if (req.session.isLoggedIn) {
+            res.status(200).render("template", {loggedIn: req.session.isLoggedIn, title: "Dashboard", contentPath: "dashboard"});
+            console.log("Dashboard: @/get - dashboard.ejs rendered @" + new Date());
+        } else {
+            res.redirect("/");
+            console.log("Dashboard: @/get - redirected from /dashboard - no user logged in @" + new Date());
+        }
     });
 
 
