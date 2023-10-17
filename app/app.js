@@ -27,6 +27,7 @@ const crypto = require('crypto');
 const RateLimit = require("express-rate-limit");
 
 
+
 // Set up logger
 const {logger, requestLogger} = require("./logger");
 
@@ -147,6 +148,20 @@ const limiter = RateLimit({
 });
 
 app.use(limiter);
+
+/* Schedule back ups for the logfiles and database */
+console.log("App: setting up interval back ups ...")
+const { BackupTool } = require("./backup");
+
+const backup = new BackupTool(
+  path.resolve(__dirname, '..'),
+  [],
+  ["logs"],
+  ["database.db"],
+  1
+  );
+backup.initialize();
+
 
 
 
