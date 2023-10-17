@@ -117,6 +117,7 @@ app.use(requestLogger);
 
 
 /** Set up session middleware */
+console.log("App: setting up session middleware...");
 app.use(session({
   secret: SECRET_KEY,
   resave: false,
@@ -149,10 +150,11 @@ const limiter = RateLimit({
 
 app.use(limiter);
 
+
 /* Schedule back ups for the logfiles and database */
 console.log("App: setting up interval back ups ...")
-const { BackupTool } = require("./backup");
 
+const { BackupTool } = require("./backup");
 const backup = new BackupTool(
   path.resolve(__dirname, '..'),
   [],
@@ -160,8 +162,8 @@ const backup = new BackupTool(
   ["database.db"],
   1
   );
-backup.initialize();
 
+backup.initialize();
 
 
 
