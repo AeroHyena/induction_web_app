@@ -151,22 +151,6 @@ const limiter = RateLimit({
 app.use(limiter);
 
 
-/* Schedule back ups for the logfiles and database */
-console.log("App: setting up interval back ups ...")
-
-const { BackupTool } = require("./backup");
-const backup = new BackupTool(
-  path.resolve(__dirname, '..'),
-  [],
-  ["logs"],
-  ["database.db"],
-  1
-  );
-
-backup.initialize();
-
-
-
 // Setup complete
 console.log("App: set up complete.")
 
