@@ -4,4 +4,3 @@ generate_pass.js
 .env
 *.db
 /logs
-/temp/*.db

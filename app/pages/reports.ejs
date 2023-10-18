@@ -1,0 +1,38 @@
+<!-- This is where users can search the database
+to see if an individual has already performed their induction,
+and if the induction has expried yet. -->
+
+<main>
+    <div class="contentContainer">
+
+        <h3>Select the appropriate options below and click 'generate' to see the report.</h3>
+
+        <div>
+            <form action="/reports" method="POST">
+                <div id="checkboxes">
+                    <input type="checkbox" class="formInput" name="showExpired" id="showExpired">
+                    <label class="formLabel" for="showExpired">Show expried inductions</label>
+                    <br>
+                    <input type="checkbox" class="formInput" name="showWeek" id="showWeek">
+                    <label class="formLabel" for="showWeek">Show inductinons expring in < 1 week</label>
+                    <br>
+                    <input type="checkbox" class="formInput" name="showMonth" id="showMonth">
+                    <label class="formLabel" for="showMonth">Show inductinons expring in < 1 month</label>
+                <br>
+                </div>
+                <button type="submit">Generate</button>
+            </form>
+            <br>
+            <div id="report">
+
+                <p>Nothing to show</p>
+            </div>
+        </div>
+
+        
+
+    </div>
+</main>
+
+<!-- Import the search_formatter.js script-->
+<script src="scripts/search_formatter.js"></script>

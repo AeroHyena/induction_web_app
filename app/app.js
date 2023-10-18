@@ -29,7 +29,7 @@ const RateLimit = require("express-rate-limit");
 
 
 // Set up logger
-const {logger, requestLogger} = require("./logger");
+//const {logger, requestLogger} = require("./logger");
 
 
 // Set up the app
@@ -112,7 +112,7 @@ const app = express();
 app.use(express.static(path.join(__dirname, "/pages"))); // Serve static files from the pages directory
 app.use(express.urlencoded({extended: true })); //parse URL-encoded data
 app.set('db', db); // Set the database in the app
-app.use(requestLogger);
+//app.use(requestLogger);
 
 
 
@@ -151,6 +151,7 @@ const limiter = RateLimit({
 app.use(limiter);
 
 
+
 // Setup complete
 console.log("App: set up complete.")
 
@@ -162,7 +163,7 @@ console.log("App: set up complete.")
 /** Import route modules and pass in the database connec connection to the route modules */
 const inductionRoutes = require("./routes/induction/induction")(app);
 const searchRoutes = require("./routes/search/search.js")(app);
-//const reportsRoutes = require("./routes/reports/reports.js")(app);
+const reportsRoutes = require("./routes/reports/reports.js")(app);
 const loginRoutes = require("./routes/login/login.js")(app);
 const logoutRoutes = require("./routes/logout/logout.js");
 const dashboardRoutes = require("./routes/dashboard/dashboard.js")(app);
@@ -172,7 +173,7 @@ const dashboardRoutes = require("./routes/dashboard/dashboard.js")(app);
 /** Use the Route modules */
 app.use("/", inductionRoutes);
 app.use("/search", searchRoutes);
-//app.use("/reports", reportsRoutes);
+app.use("/reports", reportsRoutes);
 app.use("/login", loginRoutes);
 app.use("/logout", logoutRoutes);
 app.use("/dashboard", dashboardRoutes);
