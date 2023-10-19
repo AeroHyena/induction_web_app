@@ -261,3 +261,46 @@ a {
     width: calc(100vw - 10vw); /* viewport width - padding values */
     border: 1px solid lightgray;
 }
+
+
+.reportEntry {
+    display: flex;
+    flex-direction: column;
+}
+
+.reportTitle {
+    text-decoration: underline;
+    font-size: 1.5rem;
+}
+
+.reportHeaders {
+    display: flex;
+    flex-direction: row;
+}
+
+.reportHeaders div {
+    flex-grow: 1;
+    padding: 0.5vw;
+    width: 20%;
+
+    border: 1px solid lightgray;
+}
+
+.reportList {
+    display: flex;
+    flex-direction: column;
+}
+
+.reportItem {
+    display: flex;
+    flex-direction: row;
+
+    border: 1px solid lightgrey;
+    font-size: 1rem;
+}
+
+.reportItem div {
+    flex-grow: 1;
+    padding: 0.5vw;
+    width: 20%;
+}

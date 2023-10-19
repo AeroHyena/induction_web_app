@@ -24,8 +24,50 @@ and if the induction has expried yet. -->
             </form>
             <br>
             <div id="report">
+                <% if (!reportRecords) { %>
+                    <p>Nothing to show</p>
+                <% } else { %>
+                    <!-- Iterate through the reportRecords object -->
+                    <% for (let collection in reportRecords) { %>
+                    <div class="reportEntry">
+                        
+                        <div class="reportTitle"><%= collection %></div>
+                        <br>
 
-                <p>Nothing to show</p>
+                        <% if (reportRecords[collection].length > 0) { %>
+                            <div class="reportHeaders">
+                                <div>Date Completed</div>
+                                <div>ID/Passport</div>
+                                <div>Full Names</div>
+                                <div>Employee Number</div>
+                                <div>Video Watched</div>
+                            </div>
+                            <div class="reportList">
+                                <% reportRecords[collection].forEach((record) => { %>
+                                    <div class="reportItem">
+                                        <div><%= record.date_completed %></div>
+                                        <div><%= record.id_passport_nr %></div>
+                                        <div><%= record.full_name %></div>
+                                        <div><% if (record.employee_nr) { %><%= record.employee_nr %><% }  else { %>
+                                        Guest<% } %></div>
+                                        <div><% if (record.video_watched) { %>
+                                            True
+                                        <% }  else { %>
+                                            False
+                                        <% } %></div>
+                                    </div>
+                                <% }) %>
+                            </div>
+                            <br><br>
+                        
+                            <% } else { %>
+                                <p>No data to show</p>
+                                <br><br>
+                            <% } %>
+                        </div>
+                    <% } %>
+                
+                <% } %>
             </div>
         </div>
 
