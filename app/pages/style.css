@@ -257,7 +257,7 @@ a {
     display: flex;
     flex-direction: column;
     padding: 2vw;
-    min-height: 50vh;
+    min-height: 25vh;
     width: calc(100vw - 10vw); /* viewport width - padding values */
     border: 1px solid lightgray;
 }
