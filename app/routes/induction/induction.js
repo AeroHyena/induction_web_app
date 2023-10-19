@@ -159,7 +159,17 @@ module.exports = (db) => {
 
         /** If the data checks have not found any errors, commit the data into the database */
         if (check.message == "") {
-            const data = [req.body.id_passport_nr, req.body.full_names, req.body.employeeNumber, req.body.videoWatched];
+            let employeeNumber = 0;
+            
+            if (!req.body.employeeNumber) {
+                employeeNumber = null;
+            } else {
+                employeeNumber = req.body.employeeNumber;
+            }
+            
+            console.log(x = employeeNumber)
+
+            const data = [req.body.id_passport_nr, req.body.full_names, employeeNumber, req.body.videoWatched];
             
 
             /** 
