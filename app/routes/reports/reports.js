@@ -100,47 +100,53 @@ module.exports = (db) => {
 
     /** POST route - performs the search, and renders the page with the results. */
     router.post("/", (req, res) => {
-        // Read the data
-        console.log("Reports: POST detected - reading data...");
-        let showExpired = false, showWeek = false, showMonth = false;
-        if (req.body.showExpired === "on") {
-            showExpired = true
-        };
-        if (req.body.showWeek === "on") {
-            showWeek = true
-        };
-        if (req.body.showMonth === "on") {
-            showMonth = true
-        };
-        console.log(showExpired, showWeek, showMonth)
+        if (req.body.isLoggedIn) {
+            // Read the data
+            console.log("Reports: POST detected - reading data...");
+            let showExpired = false, showWeek = false, showMonth = false;
+            if (req.body.showExpired === "on") {
+                showExpired = true
+            };
+            if (req.body.showWeek === "on") {
+                showWeek = true
+            };
+            if (req.body.showMonth === "on") {
+                showMonth = true
+            };
+            console.log(showExpired, showWeek, showMonth)
 
-        // Check if any options were selected
-        if (!showExpired && !showWeek && !showMonth) {
-            res.status(422).send("Please make sure to select at least one option");
+            // Check if any options were selected
+            if (!showExpired && !showWeek && !showMonth) {
+                res.status(422).send("Please make sure to select at least one option");
+            }
+
+
+            // Get the data from the database
+            const db = req.app.get("db");
+
+                db.all("SELECT * FROM inductions", (err, rows) => {
+                    if (err) {
+                        console.log("error", err);
+                    } else {
+                        const data = rows.map((row) => row); // Use map to extract rows
+
+
+                    const results = filterRecordsByExpiry(data);
+                    const render = {};
+                    if (showExpired) {Object.assign(render, {"Expired": results.expired})};
+                    if (showWeek) {Object.assign(render, {"Expires In A Week": results.expiresWeek})};
+                    if (showMonth) {Object.assign(render, {"Expires In A Month": results.expiresMonth})};
+                    console.log(render)
+                    
+                    res.status(200).render("template", {loggedIn: req.session.isLoggedIn, title: "Reports", contentPath: "reports", reportRecords: render});
+                    
+                    }
+                });
+
+        } else {
+            res.status(403).redirect("/");
+            console.log("Reports : @/post - access denied: no log in data found. User has been redirected to /");
         }
-
-
-        // Get the data from the database
-        const db = req.app.get("db");
-
-            db.all("SELECT * FROM inductions", (err, rows) => {
-                if (err) {
-                    console.log("error", err);
-                } else {
-                    const data = rows.map((row) => row); // Use map to extract rows
-
-
-                   const results = filterRecordsByExpiry(data);
-                   const render = {};
-                   if (showExpired) {Object.assign(render, {"Expired": results.expired})};
-                   if (showWeek) {Object.assign(render, {"Expires In A Week": results.expiresWeek})};
-                   if (showMonth) {Object.assign(render, {"Expires In A Month": results.expiresMonth})};
-                   console.log(render)
-                   
-                   res.status(200).render("template", {loggedIn: req.session.isLoggedIn, title: "Reports", contentPath: "reports", reportRecords: render});
-                   
-                }
-            });
     });
     
 

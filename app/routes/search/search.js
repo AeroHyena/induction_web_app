@@ -76,7 +76,7 @@ module.exports = (db) => {
             });
         } else {
             res.status(403).redirect("/");
-            console.log("Search : @/post - search request denied: no log in data found. User has been redirected to /");
+            console.log("Search : @/post - access denied: no log in data found. User has been redirected to /");
         }
 
     });
