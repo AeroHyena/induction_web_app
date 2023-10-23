@@ -25,6 +25,7 @@ const session = require("express-session");
 const passport = require("passport");
 const crypto = require('crypto');
 const RateLimit = require("express-rate-limit");
+const helmet = require("helmet");
 
 
 
@@ -55,6 +56,7 @@ const db = new sqlite3.Database('database.db'); // set up a database connection
 
 /** 
  * Create tables for induction data and users if one doesn't exist. 
+ * 
  * Create an entry in the users table to ensure
  * one user is present. 
  * */
@@ -152,8 +154,19 @@ app.use(limiter);
 
 
 
+// Set up HelmetJS
+console.log("App: Setting up HelmetJS ...");
+
+app.use(helmet.hidePoweredBy());  // Hide X-Powered-By;
+app.use(helmet.frameguard({action: "deny"}));  // Hide the use of this app in iframes
+app.use(helmet.xssFilter());  // Sanitize input sent to the serer
+app.use(helmet.noSniff());  // Avoid the bypassing of Content-Type
+app.use(helmet.ieNoOpen())  // Prevent IE from opening untrusted html
+
+
+
 // Setup complete
-console.log("App: set up complete.")
+console.log("App: set up complete.");
 
 
 
