@@ -131,15 +131,16 @@ module.exports = (db) => {
         console.log("Induction @/post: Checking ID/Passport ...");
 
         ID = req.body.id_passport_nr;
-        if (!validateSAIDNumber(ID)) {
-            if (ID.length > 15 || ID.length < 6) {
-                console.log("Induction: @/post - induction rejected: ID/Passport not valid");
-                 check.status = "Id/Passport not valid!";
-                 check.message = "Please check that you insert a valid South African ID or passport number.";
-                 check.code = 422;
-            }
-        }
-
+        if(ID) {
+            if (!validateSAIDNumber(ID)) {
+                if (ID.length > 15 || ID.length < 6) {
+                    console.log("Induction: @/post - induction rejected: ID/Passport not valid");
+                    check.status = "Id/Passport not valid!";
+                    check.message = "Please check that you insert a valid South African ID or passport number.";
+                    check.code = 422;
+                };
+            };
+        };
 
 
         /** Check if the optional employee number is valid --TODO-- */
@@ -150,6 +151,13 @@ module.exports = (db) => {
                 check.message = "Please check that you insert a valid employee number - do not append any letters.";
                 check.code = 422;
             }
+        }
+
+        if(!req.body.id_passport_nr && !req.body.employeeNumber) {
+            console.log("Induction: @/post - induction rejected: neither ID nor employee number was provided");
+            check.status = "Missing ID or employee number!";
+            check.message = "Please supply either your employee number or your ID/passport.";
+            check.code = 422;
         }
 
         // Check complete
@@ -166,18 +174,18 @@ module.exports = (db) => {
             } else {
                 employeeNumber = req.body.employeeNumber;
             }
-            
-            console.log(x = employeeNumber)
+        
 
-            const data = [req.body.id_passport_nr, req.body.full_names, employeeNumber, req.body.videoWatched];
+            const data = [req.body.id_passport_nr, req.body.full_names, employeeNumber, req.body.videoWatched, req.body.contractorName];
             
 
             /** 
              * Check if there is already data inside the database for this user - 
              * Do this by utilizing the ID number since that must be unique for all users
              * */ 
+
             db.get(`SELECT * FROM inductions
-            WHERE id_passport_nr LIKE ?`, data[0], function(error, row) {
+            WHERE id_passport_nr LIKE ? OR employee_Nr = ?`, [data[0], data[4]], function(error, row) {
 
                 if(error) {
                     return console.log(error.message);
@@ -189,8 +197,8 @@ module.exports = (db) => {
                     /** If there is no record, add a new one */
                     if (typeof(checked) == "undefined") {
                         console.log("Induction: @/post - inserting new data into database");
-                        db.run(`INSERT INTO inductions (id_passport_nr, full_name, employee_nr, video_Watched) 
-                        VALUES (?, ?, ?, ?)`, data, function(error) {
+                        db.run(`INSERT INTO inductions (id_passport_nr, full_name, employee_nr, video_Watched, company_contractor) 
+                        VALUES (?, ?, ?, ?, ?)`, data, function(error) {
 
 
                             if(error) {
@@ -205,8 +213,8 @@ module.exports = (db) => {
 
                         /** If there is an existing record, update it */
                         console.log("Induction: @/post - existing data found in db: ", checked);
-                        db.run(`UPDATE inductions SET (id_passport_nr, full_name, employee_nr, video_Watched)
-                        = (?, ?, ?, ?)  WHERE id = ${checked.id}`, data, function(error) {
+                        db.run(`UPDATE inductions SET (id_passport_nr, full_name, employee_nr, video_Watched, company_contractor)
+                        = (?, ?, ?, ?, ?)  WHERE id = ${checked.id}`, data, function(error) {
 
                             if(error) {
                                 return console.log(error.message);

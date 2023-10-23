@@ -24,7 +24,7 @@ route is accessed. -->
 
                 <!-- ID/Passport number-->
                 <label for="id_passport_nr" class="formLabel">ID or passport number:</label>
-                <input type="text" id="id_passport_nr" name="id_passport_nr" class="formInput" placeholder="ID/Passport" required>
+                <input type="text" id="id_passport_nr" name="id_passport_nr" class="formInput" placeholder="ID/Passport">
                 <br>
 
                 <!-- Employee or guest check -->
@@ -37,12 +37,34 @@ route is accessed. -->
                 <!-- no -->
                 <label for="employee_check_no" class="formLabel">No</label>
                 <input type="radio" id="employee_check_no" name="employee_check" class="formInput" onchange="hideEmployeeNumber()" required>
+
                 <br>
 
                 <!-- Reveal the employee number input field when yes is selected -->
                 <div id="employeeNumberContainer" style="display: none;">
                     <label for="employeeNumber" class="formLabel">What is your employee number?</label>
                     <input type="text" id="employeeNumber" name="employeeNumber" class="formInput" placeholder="Employee Number">
+                </div>
+
+                <br>
+
+                <div id="contractor">
+                    <label for="contractor_check" class="formLabel">Are you part of a group from a company/contractors?</label>
+                    <br>
+                    <!-- yes -->
+                    <label for="contractor_check_yes" class="formLabel">Yes</label>
+                    <input type="radio" id="contractor_check_yes" name="contractor_check" class="formInput" onchange="showContractor()" required>
+                    <br>
+                    <!-- no -->
+                    <label for="contractor_check_no" class="formLabel">No</label>
+                    <input type="radio" id="contractor_check_no" name="contractor_check" class="formInput" onchange="hideContractor()" required>
+                    <br>
+
+                    <!-- Reveal the contractor input field when yes is selected -->
+                    <div id="contractorNameContainer" style="display: none;">
+                    <label for="contractorName" class="formLabel">What is your company/contractor name?</label>
+                    <input type="text" id="contractorName" name="contractorName" class="formInput" placeholder="Company/Contractor">
+                </div>
                 </div>
 
                 <!-- Submit form -->

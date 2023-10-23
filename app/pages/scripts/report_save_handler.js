@@ -35,7 +35,8 @@ function extractReportData() {
           const idOrPassport = reportItem.querySelector('div:nth-child(2)').textContent.trim();
           const fullNames = reportItem.querySelector('div:nth-child(3)').textContent.trim();
           const employeeNumber = reportItem.querySelector('div:nth-child(4)').textContent.trim();
-          const videoWatched = reportItem.querySelector('div:nth-child(5)').textContent.trim();
+          const CompanyContractor = reportItem.querySelector('div:nth-child(5)').textContent.trim();
+          const videoWatched = reportItem.querySelector('div:nth-child(6)').textContent.trim();
 
           // Create an object to represent the data
           const dataPoint = {
@@ -43,6 +44,7 @@ function extractReportData() {
             IDOrPassport: idOrPassport,
             FullNames: fullNames,
             EmployeeNumber: employeeNumber,
+            CompanyContractor: CompanyContractor,
             VideoWatched: videoWatched,
           };
 
@@ -117,10 +119,12 @@ function downloadPDF() {
                   y += 5;
                   doc.text(" - Employee Number: " + dataPoint.EmployeeNumber, x, y); // Correct the variable name
                   y += 5;
+                  doc.text(" - Company/Contractor: " + dataPoint.CompanyContractor, x, y); // Correct the variable name
+                  y += 5;
                   doc.text(" - Video Watched: " + dataPoint.VideoWatched, x, y); // Correct the variable name.
                   
                   if (index == extractedData[category].length - 1) { y += 12 } else {
-                    y -= 20;
+                    y -= 25;
                   }
                   column++;
 
@@ -134,10 +138,13 @@ function downloadPDF() {
                   y += 5;
                   doc.text(" - Employee Number: " + dataPoint.EmployeeNumber, x, y); // Correct the variable name
                   y += 5;
+                  doc.text(" - Company/Contractor: " + dataPoint.CompanyContractor, x, y); // Correct the variable name
+                  y += 5;
                   doc.text(" - Video Watched: " + dataPoint.VideoWatched, x, y); // Correct the variable name.
                   y += 12;
                   x -= 100;
                   column--;
+                  console.log(dataPoint);
                 }
             });
         } else {

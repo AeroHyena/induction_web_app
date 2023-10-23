@@ -10,6 +10,7 @@ and if the induction has expried yet. -->
                 <option value="id_passport_nr">ID/Passport</option>
                 <option value="full_name">Name/Surname</option>
                 <option value="employee_nr">Employee Number</option>
+                <option value="company_contractor">Company/Contractor</option>
               </select>
             <input type=" text" name="value" class="formInput" placeholder="Value" required>
             <button type="submit">Search</button> 
@@ -29,6 +30,7 @@ and if the induction has expried yet. -->
                 <div>Status</div>
                 <div>Full Names</div>
                 <div>ID/Passport</div>
+                <div>Company/Contractor</div>
                 <div>Video Watched</div>
                 <div>Employee/Guest</div>
             </div>
@@ -38,6 +40,7 @@ and if the induction has expried yet. -->
                     <div class="status">-</div>
                     <div><%= item.full_name %></div>
                     <div><%= item.id_passport_nr %></div>
+                    <div><%= item.company_contractor %></div>
                     <div><%= item.video_watched %></div>
                     <div><% if (item.employee_nr) { %>
                         Employee

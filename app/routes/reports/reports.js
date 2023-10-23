@@ -100,7 +100,7 @@ module.exports = (db) => {
 
     /** POST route - performs the search, and renders the page with the results. */
     router.post("/", (req, res) => {
-        if (req.body.isLoggedIn) {
+        if (req.session.isLoggedIn) {
             // Read the data
             console.log("Reports: POST detected - reading data...");
             let showExpired = false, showWeek = false, showMonth = false;

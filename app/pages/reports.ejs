@@ -40,6 +40,7 @@ and if the induction has expried yet. -->
                                 <div>ID/Passport</div>
                                 <div>Full Names</div>
                                 <div>Employee Number</div>
+                                <div>Company/Contractor</div>
                                 <div>Video Watched</div>
                             </div>
                             <div class="reportList">
@@ -50,6 +51,9 @@ and if the induction has expried yet. -->
                                         <div><%= record.full_name %></div>
                                         <div><% if (record.employee_nr) { %><%= record.employee_nr %><% }  else { %>
                                         Guest<% } %></div>
+                                        <div><% if (record.company_contractor) { %>
+                                        <%= record.company_contractor %>
+                                        <% } %></div>
                                         <div><% if (record.video_watched) { %>
                                             True
                                         <% }  else { %>

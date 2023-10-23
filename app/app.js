@@ -65,9 +65,10 @@ db.serialize(() => {
     CREATE TABLE IF NOT EXISTS inductions (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       date_completed DATE DEFAULT CURRENT_TIMESTAMP,
-      id_passport_nr TEXT NOT NULL UNIQUE,
+      id_passport_nr TEXT UNIQUE,
       full_name TEXT NOT NULL,
       employee_nr INTEGER UNIQUE,
+      company_contractor TEXT,
       video_watched TEXT NOT NULL
     )`, (error) => {
     if (error) {
