@@ -235,22 +235,40 @@ a {
 .dashboard-item {
     margin: 2vw;
     padding: 2vh;
-    height: 20vh;
+    min-height: 10vh;
 
     background-color: lightgray;
-    border: 2px solid gray;
-    border-radius: 10px;;
+    border: 1px solid gray;
+    border-radius: 10px;
+
+    font-size: 1.25rem;
 }
 
 
 .dashboard-item:hover {
-    border-color: lightblue;
+    background-color: white;
+    border-color: lightgray;
 }
+
+.dashboard-item-title {
+    font-size: 2rem;
+    border-bottom: 1px solid gray;
+}
+
+.dashboard-item:hover .dashboard-item-title {
+    border-color: lightgray;
+}
+
+
+
+
 
 
 #checkboxes {
     padding-left: 2vw;
 }
+
+
 
 
 #report {

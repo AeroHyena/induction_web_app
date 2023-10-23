@@ -1,6 +1,6 @@
 {
   "name": "freestate-oil-induction-app",
-  "version": "5.2.1",
+  "version": "5.2.2",
   "engines": {
     "node": ">=18.18.0"
   },

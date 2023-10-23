@@ -17,6 +17,8 @@
 const express = require("express");
 const { todo } = require("node:test");
 const router = express.Router();
+const fs = require("fs");
+const path = require("path");
 
 
 
@@ -52,6 +54,16 @@ module.exports = (db) => {
     router.post("/", (req, res) => {
        res.send("POST detected on dashboard");
     });
+
+
+
+
+    /* Set up sub-routes */
+    router.get('/automatic_emails', (req, res) => {
+
+            res.send("a")
+    });
+
     
 
     return router;
