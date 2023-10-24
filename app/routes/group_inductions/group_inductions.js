@@ -124,8 +124,8 @@ module.exports = (db) => {
                         dataPoint.push(null);
                     }
                 });
-                    
-                    
+                
+                dataPoint.push("true");   
                 console.log(dataPoint);
                 data.push(dataPoint);
             }
@@ -151,8 +151,8 @@ module.exports = (db) => {
                         /** If there is no record, add a new one */
                         if (typeof(checked) == "undefined") {
                             console.log("GroupInductions: @/post - inserting new data into database");
-                            db.run(`INSERT INTO inductions (full_name, id_passport_nr, employee_nr, video_Watched, company_contractor) 
-                            VALUES (?, ?, ?, True, ?)`, dataPoint, function(error) {
+                            db.run(`INSERT INTO inductions (full_name, id_passport_nr, employee_nr, company_contractor, video_Watched) 
+                            VALUES (?, ?, ?, ?, ?)`, dataPoint, function(error) {
     
     
                                 if(error) {
@@ -167,8 +167,8 @@ module.exports = (db) => {
     
                             /** If there is an existing record, update it */
                             console.log("GroupInductions: @/post - existing data found in db: ", checked);
-                            db.run(`UPDATE inductions SET ( full_name, id_passport_nr, employee_nr, video_Watched, company_contractor)
-                            = (?, ?, ?, True, ?)  WHERE id = ${checked.id}`, dataPoint, function(error) {
+                            db.run(`UPDATE inductions SET ( full_name, id_passport_nr, employee_nr, company_contractor, video_Watched)
+                            = (?, ?, ?, ?, ?)  WHERE id = ${checked.id}`, dataPoint, function(error) {
     
                                 if(error) {
                                     return console.log(error.message);
