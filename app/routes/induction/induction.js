@@ -130,9 +130,9 @@ module.exports = (db) => {
         /** Check if the provided ID/Passpoirt is valid */
         console.log("Induction @/post: Checking ID/Passport ...");
 
-        ID = req.body.id_passport_nr;
+        const ID =+req.body.id_passport_nr;
         if(ID) {
-            if (!validateSAIDNumber(ID)) {
+            if (!validateSAIDNumber(+ID)) {
                 if (ID.length > 15 || ID.length < 6) {
                     console.log("Induction: @/post - induction rejected: ID/Passport not valid");
                     check.status = "Id/Passport not valid!";

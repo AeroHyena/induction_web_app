@@ -17,6 +17,7 @@
 const { time } = require("console");
 const express = require("express");
 const { todo } = require("node:test");
+const { serialize } = require("v8");
 const router = express.Router();
 
 /* Functions */
@@ -148,7 +149,39 @@ module.exports = (db) => {
             console.log("Reports : @/post - access denied: no log in data found. User has been redirected to /");
         }
     });
-    
+
+
+
+    router.post("/delete", (req, res) => {
+        const db = req.app.get("db");
+        if (req.session.isLoggedIn) {
+            // check if the record exists in the database
+            console.log("POST detected on /reports/delete")
+            console.log(req.body)
+            console.log(req.body.recordID)
+            db.get(`SELECT * FROM inductions WHERE id = ?`, req.body.recordID, (err, row) => {
+                if (err) {
+                    console.error("ERROR on db: ", err);
+                } else {
+                    console.log("Got data", row);
+                }
+            })
+            
+
+            db.run(`DELETE FROM inductions WHERE id = ?`, req.body.recordID, (error) => {
+                if (error) {
+                    console.error("ERROR deleting record in db: ", error);
+                } else {
+                    console.log("deleted record " + req.body.recordID);
+                    res.status(200).render("template", {loggedIn: req.session.isLoggedIn, title: "Reports", contentPath: "reports", reportRecords: null, alert:"deleted"});
+                    console.log("Reports/delete : @/get - reports.ejs rendered @" + new Date());
+                }
+            })
+        } else {
+            res.status(403).redirect("/");
+            console.log("Reports/delete : @/post - access denied: no log in data found. User has been redirected to /");
+        }
+    });
 
     return router;
 };
