@@ -176,6 +176,7 @@ console.log("App: set up complete.");
 /* import and use routes */
 /** Import route modules and pass in the database connec connection to the route modules */
 const inductionRoutes = require("./routes/induction/induction")(app);
+const GroupInductionsRoutes = require("./routes/group_inductions/group_inductions.js")(app);
 const searchRoutes = require("./routes/search/search.js")(app);
 const reportsRoutes = require("./routes/reports/reports.js")(app);
 const loginRoutes = require("./routes/login/login.js")(app);
@@ -186,6 +187,7 @@ const dashboardRoutes = require("./routes/dashboard/dashboard.js")(app);
 
 /** Use the Route modules */
 app.use("/", inductionRoutes);
+app.use("/group_inductions", GroupInductionsRoutes);
 app.use("/search", searchRoutes);
 app.use("/reports", reportsRoutes);
 app.use("/login", loginRoutes);

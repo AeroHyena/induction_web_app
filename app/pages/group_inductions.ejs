@@ -1,0 +1,33 @@
+<main>
+    <% if (typeof(alert) !== "undefined") { %>
+        <div class="alert">
+            <p><%= alert %></p>
+        </div>
+    <% } %>
+    <div class="contentContainer">
+        <form action="/group_inductions" method="POST">
+            <div id="inductionTable">
+
+                <div id="inductionTableHeaders">
+                    <div class="inductionTableItem">Full Names</div>
+                    <div class="inductionTableItem">ID/Passport</div>
+                    <div class="inductionTableItem">Employee Number</div>
+                    <div class="inductionTableItem">Company/Contractor</div>
+                </div>
+                
+                <div class="inductionTableRow">
+                    <div class="inductionTableItem"><input type="text" name="name1"></div>
+                    <div class="inductionTableItem"><input type="text" name="id_passport1"></div>
+                    <div class="inductionTableItem"><input type="text" name="employeeNr1"></div>
+                    <div class="inductionTableItem"><input type="text" name="contractor1"></div>
+                </div>
+                
+            </div>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</main>
+
+
+<script src="./scripts/row_manager.js"></script>
