@@ -323,6 +323,10 @@ a {
     width: 20%;
 }
 
+.reportItem:hover {
+    background-color: rgb(206, 255, 167);
+}
+
 
 #inductionTable {
     min-height: 25vh;

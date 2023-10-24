@@ -173,7 +173,8 @@ module.exports = (db) => {
                     console.error("ERROR deleting record in db: ", error);
                 } else {
                     console.log("deleted record " + req.body.recordID);
-                    res.status(200).render("template", {loggedIn: req.session.isLoggedIn, title: "Reports", contentPath: "reports", reportRecords: null, alert:"deleted"});
+                    res.status(200).render("template", {loggedIn: req.session.isLoggedIn, title: "Reports", contentPath: "reports", 
+                        reportRecords: null, alert:"You have successfully deleted the record"});
                     console.log("Reports/delete : @/get - reports.ejs rendered @" + new Date());
                 }
             })

@@ -3,6 +3,13 @@ to see if an individual has already performed their induction,
 and if the induction has expried yet. -->
 
 <main>
+
+    <% if (typeof(alert) !== "undefined") { %>
+        <div class="alert">
+            <p><%= alert %></p>
+        </div>
+    <% } %>
+
     <div class="contentContainer">
 
         <h3>Select the appropriate options below and click 'generate' to see the report.</h3>
