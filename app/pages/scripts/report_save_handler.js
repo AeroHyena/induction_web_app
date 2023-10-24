@@ -31,12 +31,12 @@ function extractReportData() {
         const reportItems = reportList.querySelectorAll('.reportItem');
         reportItems.forEach(reportItem => {
           // Extract data points within each "reportItem"
-          const dateCompleted = reportItem.querySelector('div:nth-child(1)').textContent.trim();
-          const idOrPassport = reportItem.querySelector('div:nth-child(2)').textContent.trim();
-          const fullNames = reportItem.querySelector('div:nth-child(3)').textContent.trim();
-          const employeeNumber = reportItem.querySelector('div:nth-child(4)').textContent.trim();
-          const CompanyContractor = reportItem.querySelector('div:nth-child(5)').textContent.trim();
-          const videoWatched = reportItem.querySelector('div:nth-child(6)').textContent.trim();
+          const dateCompleted = reportItem.querySelector('div:nth-child(2)').textContent.trim();
+          const idOrPassport = reportItem.querySelector('div:nth-child(3)').textContent.trim();
+          const fullNames = reportItem.querySelector('div:nth-child(4)').textContent.trim();
+          const employeeNumber = reportItem.querySelector('div:nth-child(5)').textContent.trim();
+          const CompanyContractor = reportItem.querySelector('div:nth-child(6)').textContent.trim();
+          const videoWatched = reportItem.querySelector('div:nth-child(7)').textContent.trim();
 
           // Create an object to represent the data
           const dataPoint = {
@@ -109,6 +109,10 @@ function downloadPDF() {
           if (extractedData[category].length > 0) {
               extractedData[category].forEach((dataPoint, index) => {
                   // Add datapoints
+                  if (y >= doc.internal.pageSize.height - 20) { // Check if content exceeds page height
+                    doc.addPage(); // Add a new page
+                    y = 20; // Reset y position
+                  } 
                   if (column == 1) {
                       doc.text(" - Date Completed: " + dataPoint.DateCompleted, x, y);
                       y += 5;
@@ -122,11 +126,10 @@ function downloadPDF() {
                       y += 5;
                       doc.text(" - Video Watched: " + dataPoint.VideoWatched, x, y);
                       
-                      if (index == extractedData[category].length - 1) {
+                      if (index == extractedData[category].length - 1) { // if on last record for this category
                           y += 12;
-                      } else if (y >= doc.internal.pageSize.height - 20) { // Check if content exceeds page height
-                          doc.addPage(); // Add a new page
-                          y = 20; // Reset y position
+                      } else {
+                        y -= 25; // reset y for 2nd column
                       }
                       column++;
                   } else {
@@ -145,6 +148,7 @@ function downloadPDF() {
                       y += 12;
                       x -= 100;
                       column--;
+                      
                   }
               });
           } else {
