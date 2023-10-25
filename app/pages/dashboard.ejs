@@ -42,19 +42,27 @@
         <p><b>Manage Accounts</b></p><br>
         <% data.forEach(user => { %>
             <div class="userBox">
-                <form action="/dashboard/delete" method="POST">
-                    <div class="username"><%= user.username %>  -  <%= user.role %></div>
+                
+                    <div class="username"><%= user.username %>  --  <%= user.role %></div>
                     <div class="userRow">
-                        <div>Change Role</div>
+
+                        <form action="/dashboard/change_role" method="POST">
+                            <input class="roleChangeUserID" style="display: none;" value="<%= user.id %>" name="userID">
+                            <button type="submit" style="height: 1.3vh; margin: 0; font-size: 1rem;">Change Role</button>
+                        </form>
+
                         <div> | </div>
-                        <input class="danger_userID" style="display: none;" value="<%= user.id %>" name="userID">
-                        <div class="danger" onclick="confirm(this.parentNode.parentNode)">Delete Account</div>
-                    </div>
-                    <div class="confirm" style="display: none;">
-                        <div class="danger">Are You Sure?</div>
-                        <button type="submit">Yes</button>
-                    </div>
-                </form>
+
+                        <form action="/dashboard/delete" method="POST"></form>
+                            <input class="danger_userID" style="display: none;" value="<%= user.id %>" name="userID">
+                            <div class="danger" onclick="confirm(this.parentNode.parentNode)">Delete Account</div>
+                        </div>
+                    
+                        <div class="confirm" style="display: none;">
+                            <div class="danger">Are You Sure?</div>
+                            <button type="submit">Yes</button>
+                        </div>
+                    </form>
             </div>
             <% }); %>
             

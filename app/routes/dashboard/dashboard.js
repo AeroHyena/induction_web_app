@@ -98,7 +98,7 @@ module.exports = (db) => {
 
         } else {
             res.redirect("/");
-            console.log("Dashboard: @/get - redirected from /dashboard - no user logged in @" + new Date());
+            console.log("Dashboard: @/get - redirected from /dashboard/delete - no user logged in @" + new Date());
         };
     });
 
@@ -135,9 +135,53 @@ module.exports = (db) => {
 
 
         } else {
-            //
+            res.redirect("/");
+            console.log("DashboardCreate_User : @/get - redirected from /dashboard/create_user - no user logged in @" + new Date());
         }
-    })
+    });
+
+
+
+    router.post("/change_role", (req, res) => {
+        if (req.session.isLoggedIn) {
+            console.log(req.body)
+            db = req.app.get("db");
+
+            db.get("SELECT * FROM users WHERE id = ?", req.body.userID, (error, row) => {
+                if (error) {
+                    console.error(error);
+                } else {
+                    console.log(row)
+                    let query= ""
+                    if (row.role == "administrator") {
+                        query = "UPDATE users SET role = 'user' WHERE id = ?"
+                    } else {
+                        query = "UPDATE users SET role = 'administrator' WHERE id = ?"
+                    }
+                    db.run(query, req.body.userID, error => {
+                        if (error) {
+                            console.error(error);
+                        } else {
+                            console.log("DashboardChange_Role : @POST - user role has been updated successfully");
+                            db.all(`SELECT * FROM users`, (error, rows) => {
+                                if (error) {
+                                    console.error(error);
+                                } else {
+                                    console.log(rows)
+                                    res.status(200).render("template", {loggedIn: req.session.isLoggedIn, role: req.session.role,
+                                        title: "Dashboard", contentPath: "dashboard", data: rows, alert: "The user's role has been updated successfully."});
+                                    console.log("Dashboard: @/get - dashboard.ejs rendered @" + new Date());
+                                }
+                            })
+                        }
+                    })
+                }
+            })
+        } else {
+            res.redirect("/");
+            console.log("DashboardChangeRole : @/get - redirected from /dashboard/change_role - no user logged in @" + new Date());
+        };
+    });
 
 
 
