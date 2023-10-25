@@ -1,6 +1,12 @@
 <!-- This is The dashboard. It is only accessible when a user has logged in. -->
 
 <main>
+    <% if (typeof(alert) !== "undefined") { %>
+        <div class="alert">
+            <p><%= alert %></p>
+        </div>
+    <% } %>
+
     <h3>Dashboard</h3>
     
     <div class="dashboard-item">
@@ -29,12 +35,57 @@
         <p>View Statistics</p>
     </div>
 
+    <% if (role === "administrator") { %>
     <div class="dashboard-item">
-        <p class="dashboard-item-title">Account Settings</p>
-        <p>Manage your account</p>
-        <p>Manage other accounts</p>
+        <p class="dashboard-item-title">Account Settings</p>  
+        
+        <p><b>Manage Accounts</b></p><br>
+        <% data.forEach(user => { %>
+            <div class="userBox">
+                <form action="/dashboard/delete" method="POST">
+                    <div class="username"><%= user.username %>  -  <%= user.role %></div>
+                    <div class="userRow">
+                        <div>Change Role</div>
+                        <div> | </div>
+                        <input class="danger_userID" style="display: none;" value="<%= user.id %>" name="userID">
+                        <div class="danger" onclick="confirm(this.parentNode.parentNode)">Delete Account</div>
+                    </div>
+                    <div class="confirm" style="display: none;">
+                        <div class="danger">Are You Sure?</div>
+                        <button type="submit">Yes</button>
+                    </div>
+                </form>
+            </div>
+            <% }); %>
+            
+
+            <br>
+            <p><b>Create New Account</b></p>
+            <br>
+
+            <form action="/dashboard/create_account" method="POST">
+                <label for="email">Email</label>
+                <input name="email" type="text"><br>
+                <label>Password</label>
+                <input name="password" type="text"><br>
+                <label for="name">Role</label>
+                <select name="role">
+                    <option value="user">User</option>
+                    <option value="administrator">Administrator</option>
+                </select><br>
+                <button type="submit">Create</button>
+            </form>
+
+
+        <% }; %>
     </div>
     
     
 </main>
 
+
+<script>
+    function confirm(element) {
+        element.querySelector(".confirm").style.display = "block";
+    }
+</script>

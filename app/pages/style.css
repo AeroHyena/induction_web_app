@@ -373,3 +373,26 @@ footer {
     height: 3vh;
     
 }
+
+
+
+.danger {
+    color: red;
+}
+
+.danger:hover {
+    background-color: lightcoral;
+}
+
+.userRow {
+    display: flex;
+    flex-direction: row;
+}
+
+.userBox:hover {
+    background-color: lightgray;
+}
+
+.username {
+    font-size: 1.5rem;
+}

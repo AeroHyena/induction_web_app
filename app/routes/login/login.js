@@ -73,7 +73,8 @@ module.exports = (db) => {
 
             req.session.isLoggedIn = true;
             req.session.username = user.username;
-            req.session.user_id = user.id;
+            req.session.userID = user.id;
+            req.session.role = user.role;
             console.log("Login: @/post - " + user.username + " is logged in successfully");
 
             return res.redirect('/');
