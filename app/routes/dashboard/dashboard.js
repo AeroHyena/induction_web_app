@@ -51,7 +51,7 @@ module.exports = (db) => {
                         title: "Dashboard", contentPath: "dashboard", data: rows});
                     console.log("Dashboard: @/get - dashboard.ejs rendered @" + new Date());
                 }
-            })
+            });
         } else {
             res.redirect("/");
             console.log("Dashboard: @/get - redirected from /dashboard - no user logged in @" + new Date());
@@ -91,9 +91,16 @@ module.exports = (db) => {
                         console.error("ERROR: ", error);
                     } else {
                         console.log(`DashboardDelete : @post - successfully deleted account with ID ${req.body.userID}`)  
-                        res.status(403).render("template", {loggedIn: req.session.isLoggedIn, role: req.session.role,
-                            title: "Dashboard", contentPath: "dashboard", data: rows, alert: "The account has been deleted successfully"});
-                        console.log("DashboardDelete : @/post - dashboard.ejs rendered");
+                        db = req.app.get("db");
+                        db.all(`SELECT * FROM users`, (error, rows) => {
+                            if (error) {
+                                console.error(error);
+                            } else {
+                                res.status(200).render("template", {loggedIn: req.session.isLoggedIn, role: req.session.role,
+                                    title: "Dashboard", contentPath: "dashboard", data: rows, alert: "You have successfully deleted the account"});
+                                console.log("Dashboard: @/get - dashboard.ejs rendered @" + new Date());
+                            }
+                        });
                     };
                 });
             };
