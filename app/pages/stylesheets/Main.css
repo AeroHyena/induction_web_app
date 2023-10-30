@@ -15,6 +15,7 @@ table, th, td {
 
 html {
     font-size: 16px;
+    height: 100%;
 }
 
 @media screen and (max-width: 750px) {
@@ -230,8 +231,9 @@ input {
     /* define the page div as a container for all page sub-containers */
     display: flex;
     flex-direction: column;
+
     max-width: 100vw; /* 100vw = 100% of the viewport width */
-    height: auto;
+    height: calc(100% - 20% - 14vh);
     padding: 2vw;
 }
 
