@@ -48,7 +48,7 @@ p, label {
 
 button {
     margin-left: 1.5vw;
-    margin-top: 1vh;
+    
     min-width: 5vw;
     min-height: 2vh;
 
@@ -253,14 +253,12 @@ footer {
     background-color: lightgray;
     border: 1px solid gray;
     border-radius: 10px;
-
     font-size: 1.25rem;
 }
 
 
 .dashboard-item:hover {
-    background-color: white;
-    border-color: lightgray;
+    background-color: rgb(229, 228, 228);
 }
 
 .dashboard-item-title {
@@ -342,8 +340,9 @@ footer {
 
 
 #inductionTable {
-    min-height: 25vh;
+    margin: 1vw 0;
     padding: 1vw;
+    min-height: 25vh;
 
     display: flex;
     flex-direction: column;
@@ -378,15 +377,27 @@ footer {
 
 .danger {
     color: red;
+    font-size: 1.25rem;
 }
 
 .danger:hover {
-    background-color: lightcoral;
+    background-color: #ffd68b;
 }
 
 .userRow {
     display: flex;
     flex-direction: row;
+}
+
+.userBox {
+    display: flex;
+    flex-direction: column;
+
+    margin: 1vh 0;
+    padding: 1vh;
+    
+    border: 1px solid gray;
+    border-radius: 12px;
 }
 
 .userBox:hover {
@@ -395,4 +406,24 @@ footer {
 
 .username {
     font-size: 1.5rem;
+}
+
+.confirm {
+    display: none;
+}
+
+.confirmItems {
+    display: flex;
+    flex-direction: row;
+
+    margin: 1vh;
+    padding: 1vh;
+    max-height: 5vh;
+
+    border: 1px solid gray;
+    border-radius: 12px;
+}
+
+.confirmItems:hover {
+    background: #ffd68b;
 }

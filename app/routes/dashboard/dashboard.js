@@ -47,7 +47,6 @@ module.exports = (db) => {
                 if (error) {
                     console.error(error);
                 } else {
-                    console.log(rows)
                     res.status(200).render("template", {loggedIn: req.session.isLoggedIn, role: req.session.role,
                         title: "Dashboard", contentPath: "dashboard", data: rows});
                     console.log("Dashboard: @/get - dashboard.ejs rendered @" + new Date());
@@ -72,6 +71,7 @@ module.exports = (db) => {
 
     router.post("/delete", (req, res) => {
         if (req.session.isLoggedIn) {
+            console.log("DashboardDelete : @POST delete request received - processing request ...")
             if (req.session.userID == req.body.userID) {
                 db = req.app.get("db");
                 db.all(`SELECT * FROM users`, (error, rows) => {
@@ -91,7 +91,9 @@ module.exports = (db) => {
                         console.error("ERROR: ", error);
                     } else {
                         console.log(`DashboardDelete : @post - successfully deleted account with ID ${req.body.userID}`)  
-                        res.redirect("/dashboard")
+                        res.status(403).render("template", {loggedIn: req.session.isLoggedIn, role: req.session.role,
+                            title: "Dashboard", contentPath: "dashboard", data: rows, alert: "The account has been deleted successfully"});
+                        console.log("DashboardDelete : @/post - dashboard.ejs rendered");
                     };
                 });
             };

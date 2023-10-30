@@ -36,13 +36,13 @@
     </div>
 
     <% if (role === "administrator") { %>
-    <div class="dashboard-item">
-        <p class="dashboard-item-title">Account Settings</p>  
-        
-        <p><b>Manage Accounts</b></p><br>
-        <% data.forEach(user => { %>
-            <div class="userBox">
-                
+        <div class="dashboard-item">
+            <p class="dashboard-item-title">Account Settings</p>  
+            
+            <p><b>Manage Accounts</b></p><br>
+            <% data.forEach(user => { %>
+                <div class="userBox">
+                    
                     <div class="username"><%= user.username %>  --  <%= user.role %></div>
                     <div class="userRow">
 
@@ -51,42 +51,42 @@
                             <button type="submit" style="height: 1.3vh; margin: 0; font-size: 1rem;">Change Role</button>
                         </form>
 
-                        <div> | </div>
+                        <div class="danger" onclick="confirm(this.parentNode.parentNode)">Delete Account</div>
+                    </div>
 
-                        <form action="/dashboard/delete" method="POST"></form>
+                    <div class="confirm">
+                        <form action="/dashboard/delete" method="POST"> 
                             <input class="danger_userID" style="display: none;" value="<%= user.id %>" name="userID">
-                            <div class="danger" onclick="confirm(this.parentNode.parentNode)">Delete Account</div>
-                        </div>
-                    
-                        <div class="confirm" style="display: none;">
-                            <div class="danger">Are You Sure?</div>
-                            <button type="submit">Yes</button>
-                        </div>
-                    </form>
-            </div>
+                            <div class="confirmItems">
+                                <div class="danger">Are You Sure?</div>
+                                <button type="submit">Yes</button>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
             <% }); %>
-            
+                
 
-            <br>
-            <p><b>Create New Account</b></p>
-            <br>
+                <br>
+                <p><b>Create New Account</b></p>
+                <br>
 
-            <form action="/dashboard/create_account" method="POST">
-                <label for="email">Email</label>
-                <input name="email" type="text"><br>
-                <label>Password</label>
-                <input name="password" type="text"><br>
-                <label for="name">Role</label>
-                <select name="role">
-                    <option value="user">User</option>
-                    <option value="administrator">Administrator</option>
-                </select><br>
-                <button type="submit">Create</button>
-            </form>
+                <form action="/dashboard/create_account" method="POST">
+                    <label for="email">Email</label>
+                    <input name="email" type="text"><br>
+                    <label>Password</label>
+                    <input name="password" type="text"><br>
+                    <label for="name">Role</label>
+                    <select name="role">
+                        <option value="user">User</option>
+                        <option value="administrator">Administrator</option>
+                    </select><br>
+                    <button type="submit">Create</button>
+                </form>
 
-
-        <% }; %>
-    </div>
+        </div>
+    <% }; %>
     
     
 </main>
@@ -94,6 +94,6 @@
 
 <script>
     function confirm(element) {
-        element.querySelector(".confirm").style.display = "block";
+        element.querySelector(".confirm").style.display = "flex";
     }
 </script>
