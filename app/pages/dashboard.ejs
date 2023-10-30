@@ -72,18 +72,20 @@
                 <p><b>Create New Account</b></p>
                 <br>
 
-                <form action="/dashboard/create_account" method="POST">
-                    <label for="email">Email</label>
-                    <input name="email" type="text"><br>
-                    <label>Password</label>
-                    <input name="password" type="text"><br>
-                    <label for="name">Role</label>
-                    <select name="role">
-                        <option value="user">User</option>
-                        <option value="administrator">Administrator</option>
-                    </select><br>
-                    <button type="submit">Create</button>
-                </form>
+                <div id="createAccount">
+                    <form action="/dashboard/create_account" method="POST">
+                        <label for="email">Email</label>
+                        <input name="email" type="text"><br>
+                        <label>Password</label>
+                        <input name="password" type="text"><br>
+                        <label for="name">Role</label>
+                        <select name="role">
+                            <option value="user">User</option>
+                            <option value="administrator">Administrator</option>
+                        </select><br>
+                        <button type="submit">Create</button>
+                    </form>
+                </div>
 
         </div>
     <% }; %>

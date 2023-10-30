@@ -81,3 +81,10 @@
 
 
 
+#createAccount button {
+    margin: 2vh 0;
+}
+
+#createAccount input {
+    border-color: gray;
+}
