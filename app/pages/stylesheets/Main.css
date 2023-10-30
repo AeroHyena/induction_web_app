@@ -72,33 +72,6 @@ a {
 
 
 
-#videoContainer {
-    margin: 2vw;
-    height: 50vh;  /* half of the viewport  = 50vh (vh = viewport height) */
-    max-width: 95vw;
-    background-color: lightgray;
-}
-
-
-
-#video {
-    width: 100%;
-    height: 100%;
-}
-
-
-
-#page {
-    /* define the page div as a container for all page sub-containers */
-    display: flex;
-    flex-direction: column;
-    max-width: 100vw; /* 100vw = 100% of the viewport width */
-    height: auto;
-    padding: 2vw;
-}
-
-
-
 
 
 /* Stylize page headres and footers */
@@ -120,6 +93,7 @@ header {
 .headerFiller {
     flex-grow: 1;
 }
+
 
 
 footer {
@@ -243,6 +217,22 @@ input {
 
 .danger:hover {
     background-color: #ffd68b;
+}
+
+
+
+.pageFiller {
+    flex-grow: 1;
+}
+
+
+#page {
+    /* define the page div as a container for all page sub-containers */
+    display: flex;
+    flex-direction: column;
+    max-width: 100vw; /* 100vw = 100% of the viewport width */
+    height: auto;
+    padding: 2vw;
 }
 
 

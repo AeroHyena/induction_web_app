@@ -86,7 +86,7 @@ module.exports = (db) => {
 
 
         /** use template.ejs as base, and insert induction.ejs into the template page */
-        res.status(200).render("template", {loggedIn: req.session.isLoggedIn, title: "FSOil Induction",
+        res.status(200).render("template", {loggedIn: req.session.isLoggedIn, title: "Induction",
             contentPath: "induction",  check: null});
         console.log("Induction: @/get - induction.ejs rendered @" + new Date() )
         console.log("Indcuction: @/get - user login status = ", req.session.isLoggedIn);
@@ -238,7 +238,7 @@ module.exports = (db) => {
          * Render the page and provide the reults. The induction.ejs page 
          * will handle the result and render the appropriate alert.
          * */
-        res.status(check.code).render("template", {loggedIn: req.session.isLoggedIn, title: "FSOil Induction", contentPath: "induction", check});
+        res.status(check.code).render("template", {loggedIn: req.session.isLoggedIn, title: "Induction", contentPath: "induction", check});
         console.log("Induction: @/post: the data and its result has been rendered");
     });
 
