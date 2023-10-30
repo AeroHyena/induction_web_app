@@ -1,0 +1,39 @@
+#inductionTable {
+    margin: 1vw 0;
+    padding: 2vw;
+    min-height: 25vh;
+
+    display: flex;
+    flex-direction: column;
+
+    border: 1px solid lightgray;
+    border-radius: 25px;
+}
+
+
+
+#inductionTableHeaders {
+    display: flex;
+    flex-direction: row;
+}
+
+
+
+.inductionTableRow {
+    display: flex;
+    flex-direction: row;
+}
+
+
+
+.inductionTableItem {
+    flex-grow: 1;
+    width: 100%;
+}
+
+.inductionTableItem input {
+    padding: 0;
+    width: 100%;
+    height: 3vh;
+    
+}

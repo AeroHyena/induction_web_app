@@ -85,7 +85,7 @@ module.exports = (db) => {
 
         if (req.session.isLoggedIn) {
             /** use template.ejs as base, and insert induction.ejs into the template page */
-            res.status(200).render("template", {loggedIn: req.session.isLoggedIn, title: "FSOil Group Inductions",
+            res.status(200).render("template", {loggedIn: req.session.isLoggedIn, title: "Group Inductions",
                 contentPath: "group_inductions",  check: null});
             console.log("GroupInductions : @/get - induction.ejs rendered @" + new Date() );
         } else {
@@ -180,7 +180,7 @@ module.exports = (db) => {
                     };
                 });
             });
-            res.status(200).render("template", {loggedIn: req.session.isLoggedIn, title: "FSOil Group Inductions",
+            res.status(200).render("template", {loggedIn: req.session.isLoggedIn, title: "Group Inductions",
                 contentPath: "group_inductions",  check: null, alert: "You have successfully inserted records into the database"});
             } else {
                 res.status(403).redirect("/");
