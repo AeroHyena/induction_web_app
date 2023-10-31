@@ -1,8 +1,0 @@
-documentation/**
-/node_modules
-generate_pass.js
-.env
-*.db
-/logs
-/app/emailer.js
-/temp/*
