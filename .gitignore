@@ -5,3 +5,4 @@ generate_pass.js
 *.db
 /logs
 /app/emailer.js
+/temp/*
