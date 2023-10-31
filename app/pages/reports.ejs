@@ -1,0 +1,123 @@
+<!-- This is where users can search the database
+to see if an individual has already performed their induction,
+and if the induction has expried yet. -->
+
+<main>
+
+    <% if (typeof(alert) !== "undefined") { %>
+        <div class="alert">
+            <p><%= alert %></p>
+        </div>
+    <% } %>
+
+    <div class="contentContainer">
+
+        <h3>Select the appropriate options below and click 'generate' to see the report.</h3>
+
+        <div>
+            <form action="/reports" method="POST">
+                <div id="checkboxes">
+                    <input type="checkbox" class="formInput" name="showExpired" id="showExpired">
+                    <label class="formLabel" for="showExpired">Show expried inductions</label>
+                    <br>
+                    <input type="checkbox" class="formInput" name="showWeek" id="showWeek">
+                    <label class="formLabel" for="showWeek">Show inductinons expring in < 1 week</label>
+                    <br>
+                    <input type="checkbox" class="formInput" name="showMonth" id="showMonth">
+                    <label class="formLabel" for="showMonth">Show inductinons expring in < 1 month</label>
+                <br>
+                </div>
+                <button type="submit">Generate</button>
+            </form>
+            <br>
+            <div id="report">
+                <% if (!reportRecords) { %>
+                    <p>Nothing to show</p>
+                <% } else { %>
+                    <!-- Iterate through the reportRecords object -->
+                    <% for (let collection in reportRecords) { %>
+                    <div class="reportEntry">
+                        
+                        <div class="reportTitle"><%= collection %></div>
+                        <br>
+
+                        <% if (reportRecords[collection].length > 0) { %>
+                            <div class="reportHeaders">
+                                <div>Date Completed</div>
+                                <div>ID/Passport</div>
+                                <div>Full Names</div>
+                                <div>Employee Number</div>
+                                <div>Company/Contractor</div>
+                                <div>Video Watched</div>
+                                <div>Delete Record</div>
+                            </div>
+                            <div class="reportList">
+                                <% let counter = 0; %>
+                                <% reportRecords[collection].forEach((record) => { %>
+                                    <div class="reportItem">
+                                        <% counter++; %>
+                                        <div style="display: none;" id="record<%= counter %>"><%= record.id %></div>
+                                        <div><%= record.date_completed %></div>
+                                        <div><%= record.id_passport_nr %></div>
+                                        <div><%= record.full_name %></div>
+                                        <div><% if (record.employee_nr) { %><%= record.employee_nr %><% }  else { %>
+                                        Guest<% } %></div>
+                                        <div><% if (record.company_contractor) { %>
+                                        <%= record.company_contractor %>
+                                        <% } %></div>
+                                        <div><% if (record.video_watched) { %>
+                                            True
+                                        <% }  else { %>
+                                            False
+                                        <% } %></div>
+                                        <div>
+                                            <form id="<%= counter %>"action="/reports/delete" method="POST">
+                                                <button type="submit" onclick="deleteRecord(this)">Delete</button>
+                                                <input id="extraData<%= counter %>" style="display: none;" name="recordID">
+                                            </form>
+                                        </div>
+                                    </div>
+                                <% }) %>
+                            </div>
+                            <br><br>
+                        
+                            <% } else { %>
+                                <p>No data to show</p>
+                                <br><br>
+                            <% } %>
+                        </div>
+                    <% } %>
+                
+                <% } %>
+            </div>
+
+            <div>
+               
+                    <button id="download">Download</button>
+                
+            </div>
+        </div>
+
+        
+
+    </div>
+</main>
+
+
+
+<script src="./scripts/report_save_handler.js"></script>
+<script>
+    function deleteRecord(form) {
+        try {
+            console.log(form)
+            const divIDnr = "record" + form.parentNode.id;
+            console.log(divIDnr)
+            const recordID = document.getElementById(divIDnr).innerHTML;
+
+            document.getElementById('extraData' + form.parentNode.id).value = recordID;
+        } catch (error) {
+            console.error("An error occurred:", error);
+        }
+    }
+    </script>
+

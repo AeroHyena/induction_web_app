@@ -1,0 +1,77 @@
+<!-- This is a template ejs html file.
+The general page data and structure is defined here,
+with a space where unique page data for each route will be inserted. -->
+<!DOCTYPE html>
+<html lang="en-us">
+
+
+<head>
+    <title><%= title %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="/stylesheets/Main.css">
+    <link rel="stylesheet" href="/stylesheets/<%= title %>.css">
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" integrity="sha512-qZvrmS2ekKPF2mSznTQsxqPgnpkI4DNTlrdUmTzrDgektczlKNRRhy5X5AAOnx5S09ydFYWWNSfcEqDTTHgtNA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+</head>
+
+
+<body>
+    <!-- Header goes here-->
+    <header>
+        <!-- Insert logo here-->
+        <div class="logo"><img class="logo" src="/media/logo.png"></div>
+
+        <!-- Consume center space -->
+        <div class="headerFiller"> </div>
+
+        <!-- Page title inserted automatically-->
+        <div id="header_title"><%= title %></div>
+    </header>
+
+
+    <!-- Navigation bar goes here -->
+    <!-- Navigation bar is laid out as a row with links -->
+    <nav id="nav_bar">
+        <!-- At the left-hand side of the header -->
+        <div class="navElement"><a href="/">Induction</a></div>
+        <% if (loggedIn) { %>
+            <div class="navElement"><a href="/group_inductions">Group-Inductions</a></div>
+            <div class="navElement"><a href="/search">Search</a></div>
+            <div class="navElement"><a href="/reports">Reports</a></div>
+        <% } %>
+
+        <!-- filler element to consume center space -->
+        <div class="navFiller"> </div>
+
+        <!-- At the right-hand side of the header -->
+        <% if (!loggedIn) { %>
+            <div class="navElement"><a href="/login">Login</a></div>
+        <% } else { %>
+            <div class="navElement"><a href="/dashboard">Dashboard</a></div>
+            <div class="navElement"><a href="/logout">Logout</a></div>
+        <% } %>
+    </nav>
+
+
+    <!-- Main page content goes here-->
+    <div id="page" >
+        <!-- Insert page content here -->
+        <%- include(contentPath) %>
+
+
+        <!-- Consume empty space -->
+        <div class="pageFiller"> </div>
+    </div>
+
+
+    <!-- Footer content goes here -->
+    <footer>@2023 Free State Oil. A division of VKB Group.</footer>
+</body>
+
+
+</html>

@@ -1,0 +1,38 @@
+{
+  "name": "freestate-oil-induction-app",
+  "version": "7.0.3",
+  "engines": {
+    "node": ">=18.18.0"
+  },
+  "private": true,
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.3.1",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "express-rate-limit": "^7.1.1",
+    "express-session": "^1.17.3",
+    "helmet": "^7.0.0",
+    "jsdoc": "^4.0.2",
+    "jspdf": "^2.5.1",
+    "node": "^20.7.0",
+    "nodemailer": "^6.9.7",
+    "nodemailer-mailgun-transport": "^2.1.5",
+    "passport": "^0.6.0",
+    "passport-local": "^1.0.0",
+    "sqlite3": "^5.1.6",
+    "winston": "^3.11.0",
+    "winston-daily-rotate-file": "^4.7.1"
+  },
+  "scripts": {
+    "jsdoc": "jsdoc -c jsdoc.json",
+    "start": "node app/app.js",
+    "devStart": "nodemon app/app.js"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "nodemon": "^3.0.1",
+    "prettier": "3.0.3",
+    "supertest": "^6.3.3"
+  }
+}
