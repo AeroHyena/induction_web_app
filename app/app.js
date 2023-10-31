@@ -26,6 +26,7 @@ const passport = require("passport");
 const crypto = require('crypto');
 const RateLimit = require("express-rate-limit");
 const helmet = require("helmet");
+const reportGenerator = require("./reportGenerator");
 
 
 
@@ -107,6 +108,17 @@ db.serialize(() => {
     }
   });
 });
+
+
+
+//test
+const report = reportGenerator.generate(db);
+if (report === "success") {
+  console.log("report successfully generated")
+}
+
+
+
 
 
 /** Set up the express app to be used */
