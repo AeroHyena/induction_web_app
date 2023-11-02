@@ -26,7 +26,7 @@ const passport = require("passport");
 const crypto = require('crypto');
 const RateLimit = require("express-rate-limit");
 const helmet = require("helmet");
-const reportGenerator = require("./reportGenerator");
+const reportGenerator = require("./emailer");
 
 
 
@@ -97,8 +97,8 @@ db.serialize(() => {
     }
     if (!row) {
       db.run(`
-        INSERT INTO users (username, password, role) VALUES ("rakudreemurr@gmail.com",
-        "$2a$10$5CjP458NbThnwtXcBUO1duXXoo.dVOF2fA41YXaRLutiBZNEpWHF2", 
+        INSERT INTO users (username, password, role) VALUES ("admin@email.com",
+        "$2a$10$BXdews2Olt7KAjqCjkS2s.F/sQbfEwYhHfxTjmSOHsofuGjdPUx6O", 
         "administrator")`, (error) => {
           if (error) {
             console.error("error inserting user data: ", error);
@@ -112,11 +112,11 @@ db.serialize(() => {
 
 
 //test
-const report = reportGenerator.generate(db);
+const report = new reportGenerator.Emailer(db);
+report.generateReport(db);
 if (report === "success") {
   console.log("report successfully generated")
 }
-
 
 
 

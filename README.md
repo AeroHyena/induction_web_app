@@ -1,3 +1,12 @@
+
+The app includes a test account that you can use to access all the routes:
+```username: admin@email.com
+password: Admin```
+
+
+
+
+
 - Use ``` npm run jsdoc``` to generate documentation for the app.
 
 
