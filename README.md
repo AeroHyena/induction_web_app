@@ -1,7 +1,9 @@
 
 The app includes a test account that you can use to access all the routes:
-```username: admin@email.com
-password: Admin```
+```
+username: admin@email.com
+password: Admin
+```
 
 
 
