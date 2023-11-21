@@ -1,13 +1,42 @@
 <!-- This is The dashboard. It is only accessible when a user has logged in. -->
 
 <main>
-    <% if (typeof(alert) !== "undefined") { %>
+    <% if (alert !== null) { %>
         <div class="alert">
             <p><%= alert %></p>
         </div>
     <% } %>
 
     <h3>Dashboard</h3>
+
+    <div class="dashboard-item">
+        <p class="dashboard-item-title">Generate Passcodes</p>
+        <p>Existing passcodes:</p>
+        <% guests.forEach(user => { %>
+            <div class="userBox">
+                    
+                <div class="username"><%= user.password %></div>
+                <div class="userRow">
+                    <div class="danger" onclick="confirm(this.parentNode.parentNode)">Delete Passcode</div>
+                </div>
+
+                <div class="confirm">
+                    <form action="/dashboard/delete" method="POST"> 
+                        <input class="danger_userID" style="display: none;" value="<%= user.id %>" name="userID">
+                        <div class="confirmItems">
+                            <div class="danger">Are You Sure?</div>
+                            <button type="submit">Yes</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        <% }) %>
+        <form action="/dashboard/create_passcode" method="POST">
+            <button type="submit">Create New Passcode</button>
+        </form>
+    </div>
+
     
     <div class="dashboard-item">
         <p class="dashboard-item-title">Logs</p>
@@ -17,23 +46,23 @@
     <div class="dashboard-item">
         <p class="dashboard-item-title">Automatic Emails</p>
         <br>
-        <form>
+        <form action="/dashboard/update_email_preference" method="POST">
             <label>Enable automatic emails?</label>
-            <input type="checkbox">
+            <input type="checkbox" name="addRecipient" <% if (inRecipients == true) { %> checked <% } %>>
             <br>
-            <label>Interval</label>
-            <br>
-            <label>Scope</label>
+            <label>Interval Of Emails In Days (For All Recipients):</label>
+            <input type="number" name="days" value="<%= interval %>">
             <br>
             <button type="submit">Save</button>
         </form>
+        <br>
+        <p>PLEASE NOTE: email addresses must be added to the mailgun email list. Only 5 emails are allowed.</p>
+        <p>To add a new email or remove one from the list, go to 
+            <a href="https://app.mailgun.com/app/sending/domains/sandbox35211fa874a14926aba2640af5619b8f.mailgun.org">Mailgun</a>
+        and add/remove the desired email. The password is FS.Oil1234</p>
         
     </div>
 
-    <div class="dashboard-item">
-        <p class="dashboard-item-title">Statistics</p>
-        <p>View Statistics</p>
-    </div>
 
     <% if (role === "administrator") { %>
         <div class="dashboard-item">

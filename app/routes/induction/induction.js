@@ -87,7 +87,7 @@ module.exports = (db) => {
 
         /** use template.ejs as base, and insert induction.ejs into the template page */
         res.status(200).render("template", {loggedIn: req.session.isLoggedIn, title: "Induction",
-            contentPath: "induction",  check: null});
+            contentPath: "induction",  check: null, guest: false, loggedIn: req.session.isLoggedIn});
         console.log("Induction: @/get - induction.ejs rendered @" + new Date() )
         console.log("Indcuction: @/get - user login status = ", req.session.isLoggedIn);
     });
@@ -238,8 +238,49 @@ module.exports = (db) => {
          * Render the page and provide the reults. The induction.ejs page 
          * will handle the result and render the appropriate alert.
          * */
-        res.status(check.code).render("template", {loggedIn: req.session.isLoggedIn, title: "Induction", contentPath: "induction", check});
+        res.status(check.code).render("template", {loggedIn: req.session.isLoggedIn, title: "Induction", contentPath: "induction", check, guest: true, loggedIn: req.session.isLoggedIn});
         console.log("Induction: @/post: the data and its result has been rendered");
+    });
+
+
+    router.post("/unlock", (req, res) => {
+        console.log("Induction: @/post - reading data");
+
+        let db = req.app.get("db");
+
+        db.all(`SELECT * FROM users WHERE role = 'guest'`, (err, rows) => {
+            console.log(rows);
+        
+
+
+            if (rows.length > 0) {
+                const match = {
+                    status: false,
+                    id: 0
+                };
+
+                rows.forEach(guest => {
+                    if (guest.password == req.body.passcode) {
+                        match.status = true;
+                        match.id = guest.id;
+                    }
+                    if (match.status) {
+                        db.run(`DELETE FROM users WHERE id = ?`, match.id, err => {
+                            if (err) {console.error(err)};
+                            console.log("Deleted guest passcode: ", match);
+                        })
+                        res.status(200).render("template", {loggedIn: req.session.isLoggedIn, title: "Induction", contentPath: "induction", check: null, guest: true, loggedIn: req.session.isLoggedIn});
+                        console.log("Induction: @/post: the data and its result has been rendered");
+                    } else {
+                        res.redirect("/"); 
+                    }
+                });
+            } else {
+                res.redirect("/");
+            }
+
+        });
+         
     });
 
     return router;

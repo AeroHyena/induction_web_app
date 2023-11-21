@@ -1,90 +1,86 @@
 /* General Styling for Dashboard route */
 
 .dashboard-item {
-    margin: 2vw;
-    padding: 2vh;
-    min-height: 10vh;
+  margin: 2vw;
+  padding: 2vh;
+  min-height: 10vh;
 
-    background-color: lightgray;
-    border: 1px solid gray;
-    border-radius: 10px;
-    font-size: 1.25rem;
+  background-color: lightgray;
+  border: 1px solid gray;
+  border-radius: 10px;
+  font-size: 1.25rem;
 }
 
 .dashboard-item:hover {
-    background-color: rgb(229, 228, 228);
+  background-color: rgb(229, 228, 228);
 }
 
 .dashboard-item-title {
-    font-size: 2rem;
-    border-bottom: 1px solid gray;
+  font-size: 2rem;
+  border-bottom: 1px solid gray;
 }
 
+.dashboard-item a {
+  color: blue;
+}
 
-
-
+.dashboard-item a:hover {
+  text-decoration: underline;
+}
 
 /* Styling for Manage Accounts section */
 .username {
-    font-size: 1.5rem;
+  font-size: 1.5rem;
 }
 
-
-
 .userBox {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 
-    margin: 1vh 0;
-    padding: 1vh;
-    
-    border: 1px solid gray;
-    border-radius: 12px;
+  margin: 1vh 0;
+  padding: 1vh;
+
+  border: 1px solid gray;
+  border-radius: 12px;
 }
 
 .userBox:hover {
-    background-color: lightgray;
+  background-color: lightgray;
 }
 
-
-
 .userRow {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
 
 .userRow button {
-    font-size: 1rem;
+  font-size: 1rem;
 }
 
-
-
 .confirm {
-    display: none;
+  display: none;
 }
 
 .confirmItems {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
 
-    margin: 1vh;
-    padding: 1vh;
-    max-height: 5vh;
+  margin: 1vh;
+  padding: 1vh;
+  max-height: 5vh;
 
-    border: 1px solid gray;
-    border-radius: 12px;
+  border: 1px solid gray;
+  border-radius: 12px;
 }
 
 .confirmItems:hover {
-    background: #ffd68b;
+  background: #ffd68b;
 }
 
-
-
 #createAccount button {
-    margin: 2vh 0;
+  margin: 2vh 0;
 }
 
 #createAccount input {
-    border-color: gray;
+  border-color: gray;
 }

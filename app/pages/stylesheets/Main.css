@@ -1,272 +1,232 @@
 /* reset default styles of certain elements */
-html, body, main,
-h1, h2, h3,
-p, ul, ol, li,
+html,
+body,
+main,
+h1,
+h2,
+h3,
+p,
+ul,
+ol,
+li,
 blockquote,
 figure,
-table, th, td {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    max-width: 100vw;
+table,
+th,
+td {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  max-width: 100vw;
 }
 
-
-
 html {
-    font-size: 16px;
-    height: 100%;
+  font-size: 16px;
+  height: 100%;
 }
 
 @media screen and (max-width: 800px) {
-    html {
-      font-size: 12px;
-    }
+  html {
+    font-size: 12px;
+  }
 }
 
 @media screen and (max-width: 600px) {
-    html {
-      font-size: 10px;
-    }
+  html {
+    font-size: 10px;
+  }
 }
-
-
 
 body {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 
-    min-height: 100vh;
+  min-height: 100vh;
 }
 
-
-
-h1, h2, h3 {
-    /* define margins for title elements */
-    margin: 2vw;
+h1,
+h2,
+h3 {
+  /* define margins for title elements */
+  margin: 2vw;
 }
 
 h3 {
-    font-size: 2.5rem;
+  font-size: 2.5rem;
 }
 
-
-
-p, label {
-    font-size: 1.5rem;
+p,
+label {
+  font-size: 1.5rem;
 }
-
-
 
 button {
-    margin-left: 1.5vw;
-    
-    min-width: 5vw;
-    min-height: 2vh;
+  margin-left: 1.5vw;
 
-    border: 1px solid gray;
-    background-color: rgb(237, 237, 237);
-    font-size: 1.25rem;
+  min-width: 5vw;
+  min-height: 2vh;
+
+  border: 1px solid gray;
+  background-color: rgb(237, 237, 237);
+  font-size: 1.25rem;
 }
-
-
 
 a {
-    /* reset links to have no styling */
-    font-size: none;
-    font-family: none;
-    color: black;
-    font-style: none;
-    text-decoration: none;
+  /* reset links to have no styling */
+  font-size: none;
+  font-family: none;
+  color: black;
+  font-style: none;
+  text-decoration: none;
 }
-
-
-
-
 
 /* Stylize page headres and footers */
 header {
-    /* define the header as a container for all header sub-elements */
-    display: flex;
-    flex-direction: row;
-    padding: 1vw 10vw;  /* top/bottom margins are 10px and left/right margins are 100px */
-    max-width: calc(100vw - 20vw);  /* compensate for left and right padding. Use calc to subtract padding from the viewport width */
-    /* width: 100%; */
-    height: 14vh;
+  /* define the header as a container for all header sub-elements */
+  display: flex;
+  flex-direction: row;
+  padding: 1vw 10vw; /* top/bottom margins are 10px and left/right margins are 100px */
+  max-width: calc(
+    100vw - 20vw
+  ); /* compensate for left and right padding. Use calc to subtract padding from the viewport width */
+  /* width: 100%; */
+  height: 14vh;
 
-    /* define the style for the header and it's children */
-    border-bottom: 1px solid lightgray;
-    color: #343434;
-    font-size: 4rem;
+  /* define the style for the header and it's children */
+  border-bottom: 1px solid lightgray;
+  color: #343434;
+  font-size: 4rem;
 }
 
 .headerFiller {
-    flex-grow: 1;
+  flex-grow: 1;
 }
-
-
 
 footer {
-    /* define the footer as a container for all footer sub-elements */
-    display: flex;
-    padding: 7.5vh 7.5vw; /* top/bottom margins are 50px and left/right margins are 100px */
-    max-width: calc(100vw - 7.5vw);  /* compensate for left and right padding. Use calc to subtract padding from the viewport width */
-    height: 20%;
+  /* define the footer as a container for all footer sub-elements */
+  display: flex;
+  padding: 7.5vh 7.5vw; /* top/bottom margins are 50px and left/right margins are 100px */
+  max-width: calc(
+    100vw - 7.5vw
+  ); /* compensate for left and right padding. Use calc to subtract padding from the viewport width */
+  height: 20%;
 
-    /* define the style for the footer and it's children */
-    background-color: #343434;
-    border-top: 1px solid lightgray;
-    color: #ffffff;
-    font-family: "century Gothic";
-    font-size: 0.9rem;
+  /* define the style for the footer and it's children */
+  background-color: #343434;
+  border-top: 1px solid lightgray;
+  color: #ffffff;
+  font-family: "century Gothic";
+  font-size: 0.9rem;
 }
-
-
 
 .logo {
-    height: 12vh;
+  height: 12vh;
 }
-
-
-
-
-
 
 /* Stylize Nav Bar */
 #nav_bar {
-    /* define the navigation bar div as a container for navigation elements */
-    display: flex;
-    flex-direction: row;
+  /* define the navigation bar div as a container for navigation elements */
+  display: flex;
+  flex-direction: row;
 
-    border-bottom: 1px solid lightgray;
+  border-bottom: 1px solid lightgray;
 }
 
-
 .navElement {
-    /* elements of the navigation bar */
-    margin: 10px;
-    box-sizing: border-box;
+  /* elements of the navigation bar */
+  margin: 10px;
+  box-sizing: border-box;
 
-    border-bottom: 5px solid white;
-    transition: border-bottom 0.5s ease-in-out;
-    font-size: 1.1rem;
+  border-bottom: 5px solid white;
+  transition: border-bottom 0.5s ease-in-out;
+  font-size: 1.1rem;
 }
 
 .navElement:hover {
-    border-bottom: 5px solid black;
+  border-bottom: 5px solid black;
 }
-
-
 
 .navFiller {
-    /* consume remainder center space of the nav bar */
-    flex-grow: 1;
+  /* consume remainder center space of the nav bar */
+  flex-grow: 1;
 }
-
-
-
-
-
 
 /* Stylize form elements */
 .formLabel {
-    /* make labels in a form have more margin space above and less margin space below */
-    margin-top: 25px;
-    margin-bottom: 10px;
-    padding-left: 25px;
+  /* make labels in a form have more margin space above and less margin space below */
+  margin-top: 25px;
+  margin-bottom: 10px;
+  padding-left: 25px;
 }
 
 .formInput {
-    /* make form input elements have less margin space above and more margin space below */
-    margin-top: 10px;
-    margin-bottom: 15px;
+  /* make form input elements have less margin space above and more margin space below */
+  margin-top: 10px;
+  margin-bottom: 15px;
 }
-
-
 
 button:hover {
-    background-color: rgb(206, 255, 167);
+  background-color: rgb(206, 255, 167);
 }
-
-
 
 input {
-    border: 1px solid lightgray;
-    font-size: 1.1rem;
+  border: 1px solid lightgray;
+  font-size: 1.1rem;
 }
-
-
 
 #checkboxes {
-    padding-left: 2vw;
+  padding-left: 2vw;
 }
-
-
-
-
-
 
 /* Mischallaneous styling */
 .contentContainer {
-    /* define laybout and styling for page content containers */
-    width: calc(100vw - 4vw);
+  /* define laybout and styling for page content containers */
+  width: calc(100vw - 4vw);
 }
-
-
 
 .hidden {
-    display: none;
+  display: none;
 }
 
-
-
 .danger {
-    color: red;
-    font-size: 1.25rem;
+  color: red;
+  font-size: 1.25rem;
 }
 
 .danger:hover {
-    background-color: #ffd68b;
+  background-color: #ffd68b;
 }
-
-
 
 .pageFiller {
-    flex-grow: 1;
+  flex-grow: 1;
 }
-
 
 #page {
-    /* define the page div as a container for all page sub-containers */
-    flex-grow: 1;
+  /* define the page div as a container for all page sub-containers */
+  flex-grow: 1;
 
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 
-    max-width: 100vw; /* 100vw = 100% of the viewport width */
-    height: 100%;
-    padding: 2vw;
+  max-width: 100vw; /* 100vw = 100% of the viewport width */
+  height: 100%;
+  padding: 2vw;
 }
-
-
-
-
-
 
 /* Stylize alerts */
 .alert {
-    margin: 1vw;
-    width: calc(100vw - 4vw - 4vw);
-    background-color: #ffd68b;
-    border: 1px solid #FFA500;
-    border-radius: 10px;
+  margin: 1vw;
+  width: calc(100vw - 4vw - 4vw);
+  background-color: #ffd68b;
+  border: 1px solid #ffa500;
+  border-radius: 10px;
 }
 
 .alert h3 {
-    font-size: 1.5rem;
+  font-size: 1.5rem;
 }
 
 .alert p {
-    margin: 2vw;
-    font-size: 1rem;
+  margin: 2vw;
+  font-size: 1rem;
 }

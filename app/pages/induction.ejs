@@ -3,82 +3,91 @@ This will be inserted into the template ejs file when the
 route is accessed. -->
 
     <main>
-        <!-- Induction video goes here -->
-        <h3>Please watch the video below <em>in full</em></h3>
-        <div id="videoContainer">
-            <video id="video" controls>
-                <source src="/media/video.mp4" type="video/mp4">
-            </video>
-        </div>
+        <% if (guest || loggedIn) { %>
+            <!-- Induction video goes here -->
+            <h3>Please watch the video below <em>in full</em></h3>
+            <div id="videoContainer">
+                <video id="video" controls>
+                    <source src="/media/video.mp4" type="video/mp4">
+                </video>
+            </div>
 
 
-        <!-- Create a form that captures required data for storing
-        the induction information and tracking its validity -->
-        <div id="formDiv" class="contentContainer" watched="false">
-            <h3>Please complete the form below:</h3>
-            <form id="form" action="/" method="POST">
-                <!-- First and last names-->
-                <label for="full_names" class="formLabel">Full names and surname:</label>
-                <input type="text" id="full_names" name="full_names" class="formInput" placeholder="John Doe" required>
-                <br>
-
-                <!-- ID/Passport number-->
-                <label for="id_passport_nr" class="formLabel">ID or passport number:</label>
-                <input type="text" id="id_passport_nr" name="id_passport_nr" class="formInput" placeholder="ID/Passport">
-                <br>
-
-                <!-- Employee or guest check -->
-                <p class="formLabel">Are you currently employed at Free State Oil?</p>
-
-                <!-- yes -->
-                <label for="employee_check_yes" class="formLabel">Yes</label>
-                <input type="radio" id="employee_check_yes" name="employee_check" class="formInput" onchange="showEmployeeNumber()" required>
-                <br>
-                <!-- no -->
-                <label for="employee_check_no" class="formLabel">No</label>
-                <input type="radio" id="employee_check_no" name="employee_check" class="formInput" onchange="hideEmployeeNumber()" required>
-
-                <br>
-
-                <!-- Reveal the employee number input field when yes is selected -->
-                <div id="employeeNumberContainer" style="display: none;">
-                    <label for="employeeNumber" class="formLabel">What is your employee number?</label>
-                    <input type="text" id="employeeNumber" name="employeeNumber" class="formInput" placeholder="Employee Number">
-                </div>
-
-                <br>
-
-                <div id="contractor">
-                    <label for="contractor_check" class="formLabel">Are you part of a group from a company/contractors?</label>
+            <!-- Create a form that captures required data for storing
+            the induction information and tracking its validity -->
+            <div id="formDiv" class="contentContainer" watched="false">
+                <h3>Please complete the form below:</h3>
+                <form id="form" action="/" method="POST">
+                    <!-- First and last names-->
+                    <label for="full_names" class="formLabel">Full names and surname:</label>
+                    <input type="text" id="full_names" name="full_names" class="formInput" placeholder="John Doe" required>
                     <br>
+
+                    <!-- ID/Passport number-->
+                    <label for="id_passport_nr" class="formLabel">ID or passport number:</label>
+                    <input type="text" id="id_passport_nr" name="id_passport_nr" class="formInput" placeholder="ID/Passport">
+                    <br>
+
+                    <!-- Employee or guest check -->
+                    <p class="formLabel">Are you currently employed at Free State Oil?</p>
+
                     <!-- yes -->
-                    <label for="contractor_check_yes" class="formLabel">Yes</label>
-                    <input type="radio" id="contractor_check_yes" name="contractor_check" class="formInput" onchange="showContractor()" required>
+                    <label for="employee_check_yes" class="formLabel">Yes</label>
+                    <input type="radio" id="employee_check_yes" name="employee_check" class="formInput" onchange="showEmployeeNumber()" required>
                     <br>
                     <!-- no -->
-                    <label for="contractor_check_no" class="formLabel">No</label>
-                    <input type="radio" id="contractor_check_no" name="contractor_check" class="formInput" onchange="hideContractor()" required>
+                    <label for="employee_check_no" class="formLabel">No</label>
+                    <input type="radio" id="employee_check_no" name="employee_check" class="formInput" onchange="hideEmployeeNumber()" required>
+
                     <br>
 
-                    <!-- Reveal the contractor input field when yes is selected -->
-                    <div id="contractorNameContainer" style="display: none;">
-                    <label for="contractorName" class="formLabel">What is your company/contractor name?</label>
-                    <input type="text" id="contractorName" name="contractorName" class="formInput" placeholder="Company/Contractor">
-                </div>
-                </div>
+                    <!-- Reveal the employee number input field when yes is selected -->
+                    <div id="employeeNumberContainer" style="display: none;">
+                        <label for="employeeNumber" class="formLabel">What is your employee number?</label>
+                        <input type="text" id="employeeNumber" name="employeeNumber" class="formInput" placeholder="Employee Number">
+                    </div>
 
-                <!-- Submit form -->
-                <button type="submit">submit</button> 
+                    <br>
+
+                    <div id="contractor">
+                        <label for="contractor_check" class="formLabel">Are you part of a group from a company/contractors?</label>
+                        <br>
+                        <!-- yes -->
+                        <label for="contractor_check_yes" class="formLabel">Yes</label>
+                        <input type="radio" id="contractor_check_yes" name="contractor_check" class="formInput" onchange="showContractor()" required>
+                        <br>
+                        <!-- no -->
+                        <label for="contractor_check_no" class="formLabel">No</label>
+                        <input type="radio" id="contractor_check_no" name="contractor_check" class="formInput" onchange="hideContractor()" required>
+                        <br>
+
+                        <!-- Reveal the contractor input field when yes is selected -->
+                        <div id="contractorNameContainer" style="display: none;">
+                        <label for="contractorName" class="formLabel">What is your company/contractor name?</label>
+                        <input type="text" id="contractorName" name="contractorName" class="formInput" placeholder="Company/Contractor">
+                    </div>
+                    </div>
+
+                    <!-- Submit form -->
+                    <button type="submit">submit</button> 
+                </form>
+                <!-- handle form submission status here -->
+                <% if (check) { %>
+                    <script>
+                        alert("<%= check.status %>" + "\n" + "<%= check.message %>");
+                    </script>
+                <% } %>
+                
+
+            </div>
+        <% } else { %>
+            <h3>Please enter your passcode, or log in</h3>
+            <form id="form" action="/unlock" method="POST">
+                <label for="passcode" class="formLabel">Passcode</label>
+                <input type="text" id="passcode" name="passcode" class="formInput" placeholder="Passcode">
+                <button type="submit">Submit</button>
             </form>
-            <!-- handle form submission status here -->
-            <% if (check) { %>
-                <script>
-                    alert("<%= check.status %>" + "\n" + "<%= check.message %>");
-                </script>
-            <% } %>
-            
-
-        </div>
+        <% } %>
     </main>
 
     <script src="scripts/form.js"></script>
