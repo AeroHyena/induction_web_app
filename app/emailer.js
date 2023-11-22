@@ -95,8 +95,8 @@ class Emailer {
     return { expired, expiresWeek, expiresMonth };
   }
 
-  generateReport() {
-    this.database.all("SELECT * FROM inductions", (err, rows) => {
+  generateReport(database) {
+    database.all("SELECT * FROM inductions", (err, rows) => {
       if (err) {
         console.log("error", err);
         reject(err);
@@ -267,7 +267,9 @@ class Emailer {
   activateSchedule() {
     const dayInMS = 1000 * 60 * 60 * 24;
     const days = this.getSchedule();
-    this.activeSchedule = setInterval(this.generateReport, dayInMS * days);
+    this.activeSchedule = setInterval(() => {
+      this.generateReport(this.database);
+    }, dayInMS * days);
     console.log("Scheduled emails activated");
     return "success";
   }
