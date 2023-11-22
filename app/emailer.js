@@ -264,6 +264,7 @@ class Emailer {
     return;
   }
 
+  //tests
   activateSchedule() {
     const dayInMS = 1000 * 60 * 60 * 24;
     const days = this.getSchedule();
