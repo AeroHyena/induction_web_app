@@ -109,7 +109,7 @@ class Emailer {
           "Expires In A Month": results.expiresMonth,
         };
 
-        this.recordsToPDF(result);
+        this.recordsToPDF(render);
         this.sendEmail();
       }
     });
@@ -264,7 +264,6 @@ class Emailer {
     return;
   }
 
-  //tests
   activateSchedule() {
     const dayInMS = 1000 * 60 * 60 * 24;
     const days = this.getSchedule();
