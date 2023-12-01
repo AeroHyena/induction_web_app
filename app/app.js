@@ -26,6 +26,7 @@ const crypto = require("crypto");
 const RateLimit = require("express-rate-limit");
 const helmet = require("helmet");
 const emailer = require("./emailer");
+const sqlite = require("better-sqlite3");
 
 // Set up logger
 //const {logger, requestLogger} = require("./logger");
@@ -123,11 +124,19 @@ app.set("emailer", report); // set the emailer in the app
 
 /** Set up session middleware */
 console.log("App: setting up session middleware...");
+const SqliteStore = require("better-sqlite3-session-store")(session);
+const dbSessions = new sqlite("sessions.db", { verbose: console.log });
 app.use(
   session({
+    store: new SqliteStore({
+      client: dbSessions,
+      expired: {
+        clear: true,
+        intervalMs: 900000, //ms = 15min
+      },
+    }),
     secret: SECRET_KEY,
     resave: false,
-    saveUninitialized: false,
   })
 );
 
