@@ -39,6 +39,7 @@ const SECRET_KEY = crypto.randomBytes(256).toString("hex");
 
 /** @default The server is served on the PORT environment variable, or on 8080 by default. */
 const port = process.env.PORT || 8080;
+const host = process.env.host || "0.0.0.0";
 
 /** Set up the sqlite3 database */
 console.log("App: setting up database...");
@@ -193,6 +194,6 @@ app.use("/logout", logoutRoutes);
 app.use("/dashboard", dashboardRoutes);
 
 /** launch server on the specified port, and on host 0.0.0.0 */
-app.listen(port, "0.0.0.0", () => {
+app.listen(port, host, () => {
   console.log("App: server is running on port " + port);
 });
