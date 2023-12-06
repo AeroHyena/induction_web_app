@@ -63,19 +63,17 @@ module.exports = (app) => {
             users.push(row);
           }
         });
-        res
-          .status(status)
-          .render("template", {
-            loggedIn: req.session.isLoggedIn,
-            role: req.session.role,
-            title: "Dashboard",
-            contentPath: "dashboard",
-            data: users,
-            inRecipients: checkRecipient(req.session.username),
-            interval: checkInterval(),
-            alert,
-            guests,
-          });
+        res.status(status).render("template", {
+          loggedIn: req.session.isLoggedIn,
+          role: req.session.role,
+          title: "Dashboard",
+          contentPath: "dashboard",
+          data: users,
+          inRecipients: checkRecipient(req.session.username),
+          interval: checkInterval(),
+          alert,
+          guests,
+        });
         console.log("Dashboard: @/get - dashboard.ejs rendered @" + new Date());
       }
     });
@@ -209,8 +207,6 @@ module.exports = (app) => {
   router.post("/update_email_preference", (req, res) => {
     if (req.session.isLoggedIn) {
       const emailer = req.app.get("emailer");
-      console.log("Yassssssssss");
-      console.log(req.body);
 
       // Clear existing active schedule
       emailer.clearSchedule();
@@ -231,6 +227,9 @@ module.exports = (app) => {
 
       // Schedule the emails
       emailer.activateSchedule();
+
+      // send a test email immefiately
+      emailer.generateReport(db);
 
       console.log(emailer.getRecipients(), emailer.getSchedule());
       renderPage(db, req, res, 200, "Email preferences updated");
