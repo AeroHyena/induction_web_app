@@ -30,8 +30,14 @@ class Emailer {
 
   removeRecipient(recipient) {
     const index = this.recipients.indexOf(recipient);
-    this.recipients.splice(index, 1);
-    console.log("Recipient removed successfully");
+    if (index != -1) {
+      this.recipients.splice(index, 1);
+      console.log("Recipient removed successfully");
+    } else {
+      console.log(
+        "Cannot remove recipient: Recipient not in list of recipients"
+      );
+    }
     return;
   }
 

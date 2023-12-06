@@ -118,6 +118,7 @@ module.exports = (app) => {
             console.log(
               `DashboardDelete : @post - successfully deleted account with ID ${req.body.userID}`
             );
+
             renderPage(db, req, res, 200, "Account deleted successfully!");
           }
         });
